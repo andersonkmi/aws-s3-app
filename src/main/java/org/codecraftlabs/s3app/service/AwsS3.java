@@ -30,10 +30,7 @@ public class AwsS3 {
             S3Client s3Client = S3Client.builder().region(Region.US_EAST_1).build();
             ListBucketsRequest request = ListBucketsRequest.builder().build();
             ListBucketsResponse response = s3Client.listBuckets(request);
-            return response.buckets().stream().map(bucket -> {
-                S3Bucket item = new S3Bucket(bucket.name(), bucket.creationDate());
-                return item;
-            }).collect(Collectors.toSet());
+            return response.buckets().stream().map(bucket -> new S3Bucket(bucket.name(), bucket.creationDate())).collect(Collectors.toSet());
         } catch (AwsServiceException | SdkClientException exception) {
             logger.warn("Error when listing buckets", exception);
             throw new AWSServiceException("Error when listing buckets", exception);

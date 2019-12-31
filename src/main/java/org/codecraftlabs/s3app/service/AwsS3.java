@@ -13,7 +13,7 @@ public class AwsS3 {
 
     }
 
-    public Set<S3Bucket> list() {
+    public Set<S3Bucket> listAllBuckets() {
         return null;
     }
 }

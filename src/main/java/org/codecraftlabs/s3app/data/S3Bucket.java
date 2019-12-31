@@ -1,12 +1,12 @@
 package org.codecraftlabs.s3app.data;
 
+import java.time.Instant;
 import java.util.Objects;
 
 public class S3Bucket {
     private AwsRegion region = AwsRegion.US_EAST_1;
     private String name;
-
-    private S3Bucket() {}
+    private Instant creationDate;
 
     public S3Bucket(String name) {
         this.name = name;
@@ -17,11 +17,26 @@ public class S3Bucket {
         this.region = region;
     }
 
-    public String getName() {
+    public S3Bucket(String name, Instant creationDate) {
+        this.name = name;
+        this.creationDate = creationDate;
+    }
+
+    public S3Bucket(String name, AwsRegion region, Instant creationDate) {
+        this.name = name;
+        this.region = region;
+        this.creationDate = creationDate;
+    }
+
+    public String name() {
         return name;
     }
 
-    public AwsRegion getRegion() {
+    public Instant creationDate() {
+        return creationDate;
+    }
+
+    public AwsRegion region() {
         return region;
     }
 

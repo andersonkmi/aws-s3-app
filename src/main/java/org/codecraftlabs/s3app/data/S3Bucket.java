@@ -3,6 +3,7 @@ package org.codecraftlabs.s3app.data;
 import java.util.Objects;
 
 public class S3Bucket {
+    private AwsRegion region = AwsRegion.US_EAST_1;
     private String name;
 
     private S3Bucket() {}
@@ -11,13 +12,22 @@ public class S3Bucket {
         this.name = name;
     }
 
+    public S3Bucket(String name, AwsRegion region) {
+        this.name = name;
+        this.region = region;
+    }
+
     public String getName() {
         return name;
     }
 
+    public AwsRegion getRegion() {
+        return region;
+    }
+
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return name.hashCode() + region.hashCode();
     }
 
     @Override

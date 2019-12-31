@@ -4,7 +4,7 @@ import org.codecraftlabs.s3app.data.S3Bucket;
 
 import java.util.Set;
 
-public class AwsS3Bucket {
+public class AwsS3 {
     public void create(final S3Bucket bucket) {
 
     }

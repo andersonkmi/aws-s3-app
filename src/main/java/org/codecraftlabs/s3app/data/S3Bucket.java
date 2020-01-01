@@ -1,12 +1,16 @@
 package org.codecraftlabs.s3app.data;
 
 import java.time.Instant;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class S3Bucket {
     private AwsRegion region = AwsRegion.US_EAST_1;
     private String name;
     private Instant creationDate;
+    private Set<S3Object> s3Objects = new HashSet<>();
 
     public S3Bucket(String name) {
         this.name = name;
@@ -38,6 +42,14 @@ public class S3Bucket {
 
     public AwsRegion region() {
         return region;
+    }
+
+    public void add(S3Object item) {
+        s3Objects.add(item);
+    }
+
+    public Set<S3Object> objects() {
+        return Collections.unmodifiableSet(s3Objects);
     }
 
     @Override

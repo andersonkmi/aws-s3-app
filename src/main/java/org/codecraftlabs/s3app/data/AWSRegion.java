@@ -39,8 +39,6 @@ public enum AWSRegion {
 
     @Override
     public String toString() {
-        StringBuilder buffer = new StringBuilder();
-        buffer.append(code).append(" - ").append(description);
-        return buffer.toString();
+        return code + " - " + description;
     }
 }

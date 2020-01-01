@@ -59,13 +59,12 @@ public class S3Bucket {
 
     @Override
     public String toString() {
-        StringBuilder buffer = new StringBuilder();
-        buffer.append("{");
-        buffer.append("\"name\":\"").append(name).append("\", ");
-        buffer.append("\"region\":\"").append(region.code()).append("\", ");
-        buffer.append("\"creationDate\":\"").append(creationDate.toString());
-        buffer.append("\"}");
-        return buffer.toString();
+        String buffer = "{" +
+                "\"name\":\"" + name + "\", " +
+                "\"region\":\"" + region.code() + "\", " +
+                "\"creationDate\":\"" + creationDate.toString() +
+                "\"}";
+        return buffer;
     }
 
     @Override

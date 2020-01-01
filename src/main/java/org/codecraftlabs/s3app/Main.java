@@ -8,8 +8,8 @@ import org.codecraftlabs.s3app.service.AwsS3;
 
 import java.util.Set;
 
-public class App {
-    private static final Logger logger = LogManager.getLogger(App.class);
+public class Main {
+    private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
         try {

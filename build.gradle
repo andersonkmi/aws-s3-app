@@ -46,7 +46,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'org.codecraftlabs.s3app.App'
+    mainClassName = 'org.codecraftlabs.s3app.Main'
 }
 
 test {

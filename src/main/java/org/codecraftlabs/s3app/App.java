@@ -15,7 +15,7 @@ public class App {
         try {
             AwsS3 s3 = new AwsS3();
             Set<S3Bucket> buckets = s3.listAllBuckets();
-            buckets.forEach(item -> System.out.println(item.name()));
+            buckets.forEach(System.out::println);
         } catch (AWSServiceException exception) {
             logger.error(exception.getMessage(), exception);
         }

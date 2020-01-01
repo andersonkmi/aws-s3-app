@@ -21,19 +21,19 @@ public enum AwsRegion {
     US_EAST_2("us-east-2", "US East (Ohio)"),
     US_EAST_1("us-east-1", "US East (N. Virginia)");
 
-    private String region;
+    private String regionCode;
     private String description;
 
-    AwsRegion(String region, String description) {
-        this.region = region;
+    AwsRegion(String regionCode, String description) {
+        this.regionCode = regionCode;
         this.description = description;
     }
 
-    public String getRegion() {
-        return region;
+    public String regionCode() {
+        return regionCode;
     }
 
-    public String getDescription() {
+    public String description() {
         return description;
     }
 }

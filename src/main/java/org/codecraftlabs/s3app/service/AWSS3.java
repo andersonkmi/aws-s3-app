@@ -10,6 +10,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.ListBucketsRequest;
 import software.amazon.awssdk.services.s3.model.ListBucketsResponse;
 
+import javax.annotation.Nonnull;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,11 +20,11 @@ import static org.codecraftlabs.s3app.util.AWSRegionMapper.awsRegion;
 public class AWSS3 {
     private static final Logger logger = LogManager.getLogger(AWSS3.class);
 
-    public void create(final S3Bucket bucket) throws AWSException {
+    public void create(@Nonnull final S3Bucket bucket) throws AWSException {
 
     }
 
-    public void remove(final S3Bucket bucket) throws AWSException {
+    public void remove(@Nonnull final S3Bucket bucket) throws AWSException {
 
     }
 
@@ -31,9 +32,9 @@ public class AWSS3 {
         return buckets(US_EAST_1);
     }
 
-    public Set<S3Bucket> buckets(AWSRegion region) throws AWSException {
+    public Set<S3Bucket> buckets(@Nonnull final AWSRegion region) throws AWSException {
         try {
-            logger.info("Listing all buckets");
+            logger.info(String.format("Listing all buckets from region '%s'", region.code()));
             S3Client s3Client = S3Client.builder().region(awsRegion(region)).build();
             ListBucketsRequest request = ListBucketsRequest.builder().build();
             ListBucketsResponse response = s3Client.listBuckets(request);

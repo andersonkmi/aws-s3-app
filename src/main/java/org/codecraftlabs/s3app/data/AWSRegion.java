@@ -21,16 +21,16 @@ public enum AWSRegion {
     US_EAST_2("us-east-2", "US East (Ohio)"),
     US_EAST_1("us-east-1", "US East (N. Virginia)");
 
-    private String regionCode;
+    private String code;
     private String description;
 
-    AWSRegion(String regionCode, String description) {
-        this.regionCode = regionCode;
+    AWSRegion(String code, String description) {
+        this.code = code;
         this.description = description;
     }
 
-    public String regionCode() {
-        return regionCode;
+    public String code() {
+        return code;
     }
 
     public String description() {

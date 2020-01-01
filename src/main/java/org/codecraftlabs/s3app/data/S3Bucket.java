@@ -62,7 +62,7 @@ public class S3Bucket {
         StringBuilder buffer = new StringBuilder();
         buffer.append("{");
         buffer.append("\"name\":\"").append(name).append("\", ");
-        buffer.append("\"region\":\"").append(region.regionCode()).append("\", ");
+        buffer.append("\"region\":\"").append(region.code()).append("\", ");
         buffer.append("\"creationDate\":\"").append(creationDate.toString());
         buffer.append("\"}");
         return buffer.toString();

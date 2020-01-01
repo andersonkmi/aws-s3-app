@@ -16,15 +16,15 @@ import java.util.stream.Collectors;
 public class AwsS3 {
     private static final Logger logger = LogManager.getLogger(AwsS3.class);
 
-    public void create(final S3Bucket bucket) throws AWSServiceException {
+    public void create(final S3Bucket bucket) throws AwsException {
 
     }
 
-    public void remove(final S3Bucket bucket) throws AWSServiceException {
+    public void remove(final S3Bucket bucket) throws AwsException {
 
     }
 
-    public Set<S3Bucket> listAllBuckets()throws AWSServiceException {
+    public Set<S3Bucket> listAllBuckets()throws AwsException {
         try {
             logger.info("Listing all buckets");
             S3Client s3Client = S3Client.builder().region(Region.US_EAST_1).build();
@@ -33,7 +33,7 @@ public class AwsS3 {
             return response.buckets().stream().map(bucket -> new S3Bucket(bucket.name(), bucket.creationDate())).collect(Collectors.toSet());
         } catch (AwsServiceException | SdkClientException exception) {
             logger.warn("Error when listing buckets", exception);
-            throw new AWSServiceException("Error when listing buckets", exception);
+            throw new AwsException("Error when listing buckets", exception);
         }
     }
 }

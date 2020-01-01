@@ -5,10 +5,12 @@ import org.apache.logging.log4j.Logger;
 import org.codecraftlabs.s3app.data.AwsRegion;
 import software.amazon.awssdk.regions.Region;
 
+import javax.annotation.Nonnull;
+
 public class AwsRegionMapper {
     private static final Logger logger = LogManager.getLogger(AwsRegionMapper.class);
 
-    public static Region awsRegion(AwsRegion from) {
+    public static Region awsRegion(@Nonnull AwsRegion from) {
         Region to = Region.of(from.regionCode());
         if (to == null) {
             logger.info("Could not map to an existing AWS region. Defaulting to US_EAST_1");

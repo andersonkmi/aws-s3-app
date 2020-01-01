@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             AwsS3 s3 = new AwsS3();
-            Set<S3Bucket> buckets = s3.listAllBuckets();
+            Set<S3Bucket> buckets = s3.buckets();
             buckets.forEach(logger::info);
         } catch (AwsException exception) {
             logger.error(exception.getMessage(), exception);

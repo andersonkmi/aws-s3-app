@@ -53,3 +53,14 @@ test {
     // Use junit platform for unit tests
     useJUnitPlatform()
 }
+
+task createUberJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'aws-s3-app jar',
+                'Implementation-Version': '1.0.0',
+                'Main-Class': 'org.codecraftlabs.s3app.Main'
+    }
+    archiveBaseName = 'aws-s3-app-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

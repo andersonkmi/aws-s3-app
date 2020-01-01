@@ -16,8 +16,8 @@ public class Main {
     public static void main(String[] args) {
         logger.info("Starting the app");
         try {
-            S3Bucket bucket = new S3Bucket("codecraftlabs-" + System.currentTimeMillis(), US_EAST_1);
-            AWSS3.create(bucket);
+            //S3Bucket bucket = new S3Bucket("codecraftlabs-" + System.currentTimeMillis(), US_EAST_1);
+            //AWSS3.create(bucket);
 
             Set<S3Bucket> buckets = AWSS3.buckets();
             buckets.forEach(logger::info);

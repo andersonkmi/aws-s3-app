@@ -1,6 +1,6 @@
 package org.codecraftlabs.s3app.data;
 
-public enum AwsRegion {
+public enum AWSRegion {
     AP_EAST_1("ap-east-1", "Asia Pacific (Hong Kong)"),
     AP_SOUTH_1("ap-south-1", "Asia Pacific (Mumbai)"),
     AP_NORTHEAST_1("ap-northeast-1", "Asia Pacific (Tokyo)"),
@@ -24,7 +24,7 @@ public enum AwsRegion {
     private String regionCode;
     private String description;
 
-    AwsRegion(String regionCode, String description) {
+    AWSRegion(String regionCode, String description) {
         this.regionCode = regionCode;
         this.description = description;
     }

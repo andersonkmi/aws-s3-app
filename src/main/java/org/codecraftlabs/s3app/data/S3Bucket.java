@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class S3Bucket {
-    private AwsRegion region = AwsRegion.US_EAST_1;
+    private AWSRegion region = AWSRegion.US_EAST_1;
     private String name;
     private Instant creationDate;
     private Set<S3Object> s3Objects = new HashSet<>();
@@ -16,7 +16,7 @@ public class S3Bucket {
         this.name = name;
     }
 
-    public S3Bucket(String name, AwsRegion region) {
+    public S3Bucket(String name, AWSRegion region) {
         this.name = name;
         this.region = region;
     }
@@ -26,7 +26,7 @@ public class S3Bucket {
         this.creationDate = creationDate;
     }
 
-    public S3Bucket(String name, AwsRegion region, Instant creationDate) {
+    public S3Bucket(String name, AWSRegion region, Instant creationDate) {
         this.name = name;
         this.region = region;
         this.creationDate = creationDate;
@@ -40,7 +40,7 @@ public class S3Bucket {
         return creationDate;
     }
 
-    public AwsRegion region() {
+    public AWSRegion region() {
         return region;
     }
 

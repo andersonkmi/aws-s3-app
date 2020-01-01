@@ -2,15 +2,15 @@ package org.codecraftlabs.s3app.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.codecraftlabs.s3app.data.AwsRegion;
+import org.codecraftlabs.s3app.data.AWSRegion;
 import software.amazon.awssdk.regions.Region;
 
 import javax.annotation.Nonnull;
 
-public class AwsRegionMapper {
-    private static final Logger logger = LogManager.getLogger(AwsRegionMapper.class);
+public class AWSRegionMapper {
+    private static final Logger logger = LogManager.getLogger(AWSRegionMapper.class);
 
-    public static Region awsRegion(@Nonnull AwsRegion from) {
+    public static Region awsRegion(@Nonnull AWSRegion from) {
         logger.debug(String.format("Mapping region '%s - %s'", from.regionCode(), from.description()));
         Region to = Region.of(from.regionCode());
         if (to == null) {

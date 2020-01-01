@@ -10,6 +10,8 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.CreateBucketConfiguration;
 import software.amazon.awssdk.services.s3.model.CreateBucketRequest;
+import software.amazon.awssdk.services.s3.model.DeleteBucketRequest;
+import software.amazon.awssdk.services.s3.model.DeleteBucketResponse;
 import software.amazon.awssdk.services.s3.model.ListBucketsRequest;
 import software.amazon.awssdk.services.s3.model.ListBucketsResponse;
 
@@ -40,12 +42,22 @@ public final class AWSS3 {
             logger.info(String.format("S3 bucket '%s' created!", bucket.name()));
         } catch (AwsServiceException | SdkClientException exception) {
             logger.warn("Error when creating a new bucket", exception);
-            throw new AWSException("Error when listing buckets", exception);
+            throw new AWSException("Error when deleting a new bucket", exception);
         }
     }
 
-    public void remove(@Nonnull final S3Bucket bucket) throws AWSException {
-
+    public static void remove(@Nonnull final S3Bucket bucket) throws AWSException {
+        logger.info(String.format("Removing the bucket: '%s'", bucket.name()));
+        try {
+            DeleteBucketRequest request = DeleteBucketRequest.builder().bucket(bucket.name()).build();
+            Region selectedRegion = awsRegion(bucket.region());
+            S3Client s3Client = S3Client.builder().region(selectedRegion).build();
+            s3Client.deleteBucket(request);
+            logger.info(String.format("S3 bucket '%s' deleted!", bucket.name()));
+        } catch (AwsServiceException | SdkClientException exception) {
+            logger.warn("Error when deleting a bucket", exception);
+            throw new AWSException("Error when deleting a bucket", exception);
+        }
     }
 
     public static Set<S3Bucket> buckets() throws AWSException {

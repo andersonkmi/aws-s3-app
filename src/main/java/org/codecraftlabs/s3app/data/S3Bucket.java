@@ -12,9 +12,6 @@ public class S3Bucket {
     private Instant creationDate;
     private Set<S3Object> s3Objects = new HashSet<>();
 
-    public S3Bucket(String name) {
-        this.name = name;
-    }
 
     public S3Bucket(String name, AWSRegion region) {
         this.name = name;

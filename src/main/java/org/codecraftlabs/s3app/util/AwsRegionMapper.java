@@ -11,6 +11,7 @@ public class AwsRegionMapper {
     private static final Logger logger = LogManager.getLogger(AwsRegionMapper.class);
 
     public static Region awsRegion(@Nonnull AwsRegion from) {
+        logger.debug(String.format("Mapping region '%s - %s'", from.regionCode(), from.description()));
         Region to = Region.of(from.regionCode());
         if (to == null) {
             logger.info("Could not map to an existing AWS region. Defaulting to US_EAST_1");

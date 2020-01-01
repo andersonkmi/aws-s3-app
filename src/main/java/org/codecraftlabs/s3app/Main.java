@@ -12,10 +12,12 @@ public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
+        logger.info("Starting the app");
         try {
             AwsS3 s3 = new AwsS3();
             Set<S3Bucket> buckets = s3.buckets();
             buckets.forEach(logger::info);
+            logger.info("App finished OK!");
         } catch (AwsException exception) {
             logger.error(exception.getMessage(), exception);
         }

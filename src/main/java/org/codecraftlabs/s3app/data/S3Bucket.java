@@ -59,12 +59,11 @@ public class S3Bucket {
 
     @Override
     public String toString() {
-        String buffer = "{" +
+        return "{" +
                 "\"name\":\"" + name + "\", " +
                 "\"region\":\"" + region.code() + "\", " +
                 "\"creationDate\":\"" + creationDate.toString() +
                 "\"}";
-        return buffer;
     }
 
     @Override

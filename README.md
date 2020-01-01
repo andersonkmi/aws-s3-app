@@ -8,6 +8,7 @@ This is a small application I created to play with AWS SDK version for S3 and Ja
 the following functions are created:
 
 * Bucket listing
+* Single bucket creation
 
 ## Build
 

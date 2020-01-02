@@ -1,5 +1,6 @@
 package org.codecraftlabs.s3app.data;
 
+import javax.annotation.Nonnull;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,17 +14,17 @@ public class S3Bucket {
     private Set<S3Object> s3Objects = new HashSet<>();
 
 
-    public S3Bucket(String name, AWSRegion region) {
+    public S3Bucket(@Nonnull String name, @Nonnull AWSRegion region) {
         this.name = name;
         this.region = region;
     }
 
-    public S3Bucket(String name, Instant creationDate) {
+    public S3Bucket(@Nonnull String name, @Nonnull Instant creationDate) {
         this.name = name;
         this.creationDate = creationDate;
     }
 
-    public S3Bucket(String name, AWSRegion region, Instant creationDate) {
+    public S3Bucket(@Nonnull String name, @Nonnull AWSRegion region, @Nonnull Instant creationDate) {
         this.name = name;
         this.region = region;
         this.creationDate = creationDate;
@@ -64,7 +65,7 @@ public class S3Bucket {
     }
 
     @Override
-    public boolean equals(Object other) {
+    public boolean equals(@Nonnull Object other) {
         if (this == other) {
             return true;
         }

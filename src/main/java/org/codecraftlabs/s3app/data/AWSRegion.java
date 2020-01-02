@@ -1,5 +1,7 @@
 package org.codecraftlabs.s3app.data;
 
+import javax.annotation.Nonnull;
+
 public enum AWSRegion {
     AP_EAST_1("ap-east-1", "Asia Pacific (Hong Kong)"),
     AP_SOUTH_1("ap-south-1", "Asia Pacific (Mumbai)"),
@@ -24,7 +26,7 @@ public enum AWSRegion {
     private String code;
     private String description;
 
-    AWSRegion(String code, String description) {
+    AWSRegion(@Nonnull String code, @Nonnull String description) {
         this.code = code;
         this.description = description;
     }

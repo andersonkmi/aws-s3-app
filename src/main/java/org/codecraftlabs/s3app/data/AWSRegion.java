@@ -17,7 +17,7 @@ public enum AWSRegion {
     EU_CENTRAL_1("eu-central-1", "Europe (Frankfurt)"),
     ME_SOUTH_1("ap-south-1", "Middle East (Bahrain)"),
     CA_CENTRAL_1("ca-central-1", "Canada (Central)"),
-    SA_EAST_1("sa-east-1", "South America (São Paulo)"),
+    SA_EAST_1("sa-east-1", "South America (Sao Paulo)"),
     US_WEST_1(" us-west-1", "US West (N. California)"),
     US_WEST_2(" us-west-2", "US West (Oregon)"),
     US_EAST_2("us-east-2", "US East (Ohio)"),

@@ -35,7 +35,7 @@ public class Main {
             String awsRegion = cmdLineUtil.getOptionValue(AWS_REGION_LONG_OPT);
             String bucketName = cmdLineUtil.getOptionValue(S3_BUCKET_NAME_LONG_OPT);
 
-            S3Operation operation = S3Operation.valueOf(serviceName);
+            S3Operation operation = S3Operation.findByCode(serviceName);
             if (CREATE_BUCKET == operation) {
                 AWSRegion region = AWSRegion.valueOf(awsRegion);
                 S3Bucket bucket = new S3Bucket(bucketName, region);
@@ -47,10 +47,14 @@ public class Main {
                 S3BucketDeleteService service = new S3BucketDeleteService();
                 service.remove(bucket);
             } else if (LIST_BUCKET == operation) {
-                AWSRegion region = AWSRegion.valueOf(awsRegion);
-                S3BucketListService service = new S3BucketListService();
-                Set<S3Bucket> buckets = service.buckets(region);
-                buckets.forEach(logger::info);
+                AWSRegion region = AWSRegion.findByCode(awsRegion);
+                if (region != null) {
+                    S3BucketListService service = new S3BucketListService();
+                    Set<S3Bucket> buckets = service.buckets(region);
+                    buckets.forEach(logger::info);
+                }
+            } else {
+                logger.warn("No action performed");
             }
 
             logger.info("App finished OK!");

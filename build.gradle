@@ -64,6 +64,6 @@ task createUberJar(type: Jar) {
                 'Main-Class': 'org.codecraftlabs.s3app.Main'
     }
     archiveBaseName = 'aws-s3-app-all'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }

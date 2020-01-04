@@ -10,4 +10,17 @@ public enum S3Operation {
     S3Operation(String code) {
         this.code = code;
     }
+
+    protected String code() {
+        return code;
+    }
+
+    public static S3Operation findByCode(String code) throws IllegalArgumentException {
+        for (S3Operation operation : values()) {
+            if (operation.code().equals(code)) {
+                return operation;
+            }
+        }
+        return null;
+    }
 }

@@ -41,8 +41,6 @@ public class CommandLineUtil {
 
             if (cmdLine.hasOption(S3_BUCKET_NAME_OPT)) {
                 options.put(S3_BUCKET_NAME_LONG_OPT, cmdLine.getOptionValue(S3_BUCKET_NAME_OPT));
-            } else {
-                throw new CommandLineException("-b option is missing");
             }
         } catch (ParseException exception) {
             logger.error("Command line parse error", exception);

@@ -39,6 +39,15 @@ public enum AWSRegion {
         return description;
     }
 
+    public static AWSRegion findByCode(String code) {
+        for (AWSRegion region : values()) {
+            if (region.code().equals(code)) {
+                return region;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return code + " - " + description;

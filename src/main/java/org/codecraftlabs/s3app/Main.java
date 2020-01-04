@@ -16,18 +16,19 @@ import java.util.Set;
 
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
+    private static final String[] SERVICE_OPTIONS = {"s", "service"};
+    private static final String[] BUCKET_OPTIONS = {"b", "bucket"};
 
     public static void main(String[] args) {
         logger.info("Starting the app");
         final Options cmdLineOpts = new Options();
-        cmdLineOpts.addOption("s", "service", true, "Select which service")
-                .addOption("b", "bucketName", true, "Bucket name");
+        cmdLineOpts.addOption(SERVICE_OPTIONS[0], SERVICE_OPTIONS[1], true, "Select which service")
+                .addOption(BUCKET_OPTIONS[0], BUCKET_OPTIONS[1], true, "Bucket name");
 
         CommandLineParser cmdLineParser = new DefaultParser();
 
         try {
             CommandLine cmdLine = cmdLineParser.parse(cmdLineOpts, args);
-            // verify options here
 
             S3BucketListService service = new S3BucketListService();
             Set<S3Bucket> buckets = service.buckets();

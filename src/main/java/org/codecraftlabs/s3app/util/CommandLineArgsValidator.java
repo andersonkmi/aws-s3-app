@@ -10,20 +10,16 @@ public class CommandLineArgsValidator {
             return;
         }
 
-        if (args.containsKey(CommandLineUtil.S3_SERVICE_LONG_OPT)) {
-            String value = args.get(CommandLineUtil.S3_SERVICE_LONG_OPT);
-            CommandLineS3Service operation = CommandLineS3Service.findByCode(value);
-            if (operation == null) {
-                throw new InvalidArgumentException(String.format("Invalid service: '%s'", value));
-            }
+        String value = args.get(CommandLineUtil.S3_SERVICE_LONG_OPT);
+        CommandLineS3Service operation = CommandLineS3Service.findByCode(value);
+        if (operation == null) {
+            throw new InvalidArgumentException(String.format("Invalid service: '%s'", value));
         }
 
-        if (args.containsKey(CommandLineUtil.AWS_REGION_LONG_OPT)) {
-            String value = args.get(CommandLineUtil.AWS_REGION_LONG_OPT);
-            AWSRegion region = AWSRegion.findByCode(value);
-            if (region == null) {
-                throw new InvalidArgumentException(String.format("Invalid region: '%s'", value));
-            }
+        String regionValue = args.get(CommandLineUtil.AWS_REGION_LONG_OPT);
+        AWSRegion region = AWSRegion.findByCode(regionValue);
+        if (region == null) {
+            throw new InvalidArgumentException(String.format("Invalid region: '%s'", regionValue));
         }
     }
 }

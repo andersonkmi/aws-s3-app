@@ -28,13 +28,10 @@ public class Main {
     private static final int ERROR_RETURN_CODE = 1;
 
     public static void main(String[] args) {
-        logger.info("Starting the app");
-
         try {
             CommandLineUtil cmdLineUtil = new CommandLineUtil();
             cmdLineUtil.parse(args);
             execute(cmdLineUtil.options());
-            logger.info("App finished OK!");
         } catch (AWSException exception) {
             logger.error(exception.getMessage(), exception);
             System.exit(ERROR_RETURN_CODE);

@@ -33,4 +33,26 @@ public class CommandLineArgsValidatorTest {
             validateCommandLineArgs(args);
         });
     }
+
+    @Test
+    void nullServiceArgument() {
+        Map<String, String> args = new HashMap<>();
+        args.put(S3_SERVICE_LONG_OPT, null);
+        args.put(AWS_REGION_LONG_OPT, "us-east-1");
+
+        Assertions.assertThrows(InvalidArgumentException.class, () -> {
+            validateCommandLineArgs(args);
+        });
+    }
+
+    @Test
+    void invalidServiceArgument() {
+        Map<String, String> args = new HashMap<>();
+        args.put(S3_SERVICE_LONG_OPT, "blabla");
+        args.put(AWS_REGION_LONG_OPT, "us-east-1");
+
+        Assertions.assertThrows(InvalidArgumentException.class, () -> {
+            validateCommandLineArgs(args);
+        });
+    }
 }

@@ -1,4 +1,4 @@
-# aws-s3-app
+# aws-s3-app [![Build Status](https://travis-ci.org/andersonkmi/aws-s3-app.svg?branch=master)](https://travis-ci.org/andersonkmi/aws-s3-app)
 
 Sandbox project to play with Java 11, AWS SDK version 2 and S3.
 

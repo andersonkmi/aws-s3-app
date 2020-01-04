@@ -9,6 +9,7 @@ import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,15 +24,11 @@ public class CommandLineUtil {
     public static final String AWS_REGION_LONG_OPT = "region";
 
     final private Map<String, String> options = new HashMap<>();
-    final private Options cmdLineOpts = new Options();
+    final private static Options cmdLineOpts = new Options().addRequiredOption(S3_SERVICE_OPT, S3_SERVICE_LONG_OPT, true, "Select which service")
+            .addRequiredOption(AWS_REGION_OPT, AWS_REGION_LONG_OPT, true, "AWS region to operate")
+            .addOption(S3_BUCKET_NAME_OPT, S3_BUCKET_NAME_LONG_OPT,true, "Bucket name");
 
-    public CommandLineUtil() {
-        cmdLineOpts.addRequiredOption(S3_SERVICE_OPT, S3_SERVICE_LONG_OPT, true, "Select which service")
-                .addRequiredOption(AWS_REGION_OPT, AWS_REGION_LONG_OPT, true, "AWS region to operate")
-                .addOption(S3_BUCKET_NAME_OPT, S3_BUCKET_NAME_LONG_OPT,true, "Bucket name");
-    }
-
-    public void parseArgs(String[] args) throws CommandLineException {
+    public void parse(String[] args) throws CommandLineException {
         try {
             CommandLineParser cmdLineParser = new DefaultParser();
             CommandLine cmdLine = cmdLineParser.parse(cmdLineOpts, args);
@@ -48,11 +45,11 @@ public class CommandLineUtil {
         }
     }
 
-    public String getOptionValue(String key) {
-        return options.getOrDefault(key, "");
+    public Map<String, String> options() {
+        return Collections.unmodifiableMap(options);
     }
 
-    public void showHelp() {
+    public static void help() {
         HelpFormatter helpFormatter = new HelpFormatter();
         String header = "\nAWS S3 sandbox app\n";
         String footer = "\nThank you for using\n";

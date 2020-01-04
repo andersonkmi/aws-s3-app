@@ -8,7 +8,6 @@ import org.codecraftlabs.s3app.service.AWSException;
 import org.codecraftlabs.s3app.service.S3BucketCreateService;
 import org.codecraftlabs.s3app.service.S3BucketDeleteService;
 import org.codecraftlabs.s3app.service.S3BucketListService;
-import org.codecraftlabs.s3app.util.CommandLineArgsValidator;
 import org.codecraftlabs.s3app.util.CommandLineException;
 import org.codecraftlabs.s3app.util.CommandLineUtil;
 import org.codecraftlabs.s3app.util.InvalidArgumentException;

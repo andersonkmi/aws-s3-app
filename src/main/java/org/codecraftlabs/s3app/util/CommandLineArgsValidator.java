@@ -12,7 +12,7 @@ public class CommandLineArgsValidator {
 
         if (args.containsKey(CommandLineUtil.S3_SERVICE_LONG_OPT)) {
             String value = args.get(CommandLineUtil.S3_SERVICE_LONG_OPT);
-            S3Operation operation = S3Operation.findByCode(value);
+            CommandLineS3Service operation = CommandLineS3Service.findByCode(value);
             if (operation == null) {
                 throw new InvalidArgumentException(String.format("Invalid service: '%s'", value));
             }

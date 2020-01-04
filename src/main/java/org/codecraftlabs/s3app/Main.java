@@ -11,7 +11,7 @@ import org.codecraftlabs.s3app.service.S3BucketListService;
 import org.codecraftlabs.s3app.util.CommandLineException;
 import org.codecraftlabs.s3app.util.CommandLineUtil;
 import org.codecraftlabs.s3app.util.InvalidArgumentException;
-import org.codecraftlabs.s3app.util.S3Operation;
+import org.codecraftlabs.s3app.util.CommandLineS3Service;
 
 import java.util.Map;
 import java.util.Set;
@@ -20,9 +20,9 @@ import static org.codecraftlabs.s3app.util.CommandLineUtil.AWS_REGION_LONG_OPT;
 import static org.codecraftlabs.s3app.util.CommandLineUtil.S3_BUCKET_NAME_LONG_OPT;
 import static org.codecraftlabs.s3app.util.CommandLineUtil.S3_SERVICE_LONG_OPT;
 import static org.codecraftlabs.s3app.util.CommandLineUtil.help;
-import static org.codecraftlabs.s3app.util.S3Operation.CREATE_BUCKET;
-import static org.codecraftlabs.s3app.util.S3Operation.DELETE_BUCKET;
-import static org.codecraftlabs.s3app.util.S3Operation.LIST_BUCKET;
+import static org.codecraftlabs.s3app.util.CommandLineS3Service.CREATE_BUCKET;
+import static org.codecraftlabs.s3app.util.CommandLineS3Service.DELETE_BUCKET;
+import static org.codecraftlabs.s3app.util.CommandLineS3Service.LIST_BUCKET;
 import static org.codecraftlabs.s3app.util.CommandLineArgsValidator.validateCommandLineArgs;
 
 public class Main {
@@ -52,7 +52,7 @@ public class Main {
         String awsRegion = args.getOrDefault(AWS_REGION_LONG_OPT, "");
         String bucketName = args.getOrDefault(S3_BUCKET_NAME_LONG_OPT, "");
 
-        S3Operation operation = S3Operation.findByCode(serviceName);
+        CommandLineS3Service operation = CommandLineS3Service.findByCode(serviceName);
         if (CREATE_BUCKET == operation) {
             AWSRegion region = AWSRegion.valueOf(awsRegion);
             S3Bucket bucket = new S3Bucket(bucketName, region);

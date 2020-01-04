@@ -8,8 +8,10 @@ import org.codecraftlabs.s3app.service.AWSException;
 import org.codecraftlabs.s3app.service.S3BucketCreateService;
 import org.codecraftlabs.s3app.service.S3BucketDeleteService;
 import org.codecraftlabs.s3app.service.S3BucketListService;
+import org.codecraftlabs.s3app.util.CommandLineArgsValidator;
 import org.codecraftlabs.s3app.util.CommandLineException;
 import org.codecraftlabs.s3app.util.CommandLineUtil;
+import org.codecraftlabs.s3app.util.InvalidArgumentException;
 import org.codecraftlabs.s3app.util.S3Operation;
 
 import java.util.Map;
@@ -22,6 +24,7 @@ import static org.codecraftlabs.s3app.util.CommandLineUtil.help;
 import static org.codecraftlabs.s3app.util.S3Operation.CREATE_BUCKET;
 import static org.codecraftlabs.s3app.util.S3Operation.DELETE_BUCKET;
 import static org.codecraftlabs.s3app.util.S3Operation.LIST_BUCKET;
+import static org.codecraftlabs.s3app.util.CommandLineArgsValidator.validateCommandLineArgs;
 
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
@@ -31,11 +34,14 @@ public class Main {
         try {
             CommandLineUtil cmdLineUtil = new CommandLineUtil();
             cmdLineUtil.parse(args);
-            execute(cmdLineUtil.options());
+
+            Map<String, String> arguments = cmdLineUtil.options();
+            validateCommandLineArgs(arguments);
+            execute(arguments);
         } catch (AWSException exception) {
             logger.error(exception.getMessage(), exception);
             System.exit(ERROR_RETURN_CODE);
-        } catch (IllegalArgumentException | CommandLineException exception) {
+        } catch (InvalidArgumentException | IllegalArgumentException | CommandLineException exception) {
             logger.error("Failed to parse command line options", exception);
             help();
             System.exit(ERROR_RETURN_CODE);

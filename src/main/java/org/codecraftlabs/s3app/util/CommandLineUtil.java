@@ -19,12 +19,15 @@ public class CommandLineUtil {
     public static final String S3_SERVICE_LONG_OPT = "service";
     public static final String S3_BUCKET_NAME_OPT = "b";
     public static final String S3_BUCKET_NAME_LONG_OPT = "bucket";
+    public static final String AWS_REGION_OPT = "r";
+    public static final String AWS_REGION_LONG_OPT = "region";
 
     final private Map<String, String> options = new HashMap<>();
     final private Options cmdLineOpts = new Options();
 
     public CommandLineUtil() {
-        cmdLineOpts.addOption(S3_SERVICE_OPT, S3_SERVICE_LONG_OPT, true, "Select which service")
+        cmdLineOpts.addRequiredOption(S3_SERVICE_OPT, S3_SERVICE_LONG_OPT, true, "Select which service")
+                .addRequiredOption(AWS_REGION_OPT, AWS_REGION_LONG_OPT, true, "AWS region to operate")
                 .addOption(S3_BUCKET_NAME_OPT, S3_BUCKET_NAME_LONG_OPT,true, "Bucket name");
     }
 
@@ -33,14 +36,11 @@ public class CommandLineUtil {
             CommandLineParser cmdLineParser = new DefaultParser();
             CommandLine cmdLine = cmdLineParser.parse(cmdLineOpts, args);
 
-            if (cmdLine.hasOption(S3_SERVICE_OPT)) {
-                options.put(S3_SERVICE_OPT, cmdLine.getOptionValue(S3_SERVICE_OPT));
-            } else {
-                throw new CommandLineException("-s option is missing");
-            }
+            options.put(S3_SERVICE_LONG_OPT, cmdLine.getOptionValue(S3_SERVICE_OPT));
+            options.put(AWS_REGION_LONG_OPT, cmdLine.getOptionValue(AWS_REGION_OPT));
 
             if (cmdLine.hasOption(S3_BUCKET_NAME_OPT)) {
-                options.put(S3_BUCKET_NAME_OPT, cmdLine.getOptionValue(S3_BUCKET_NAME_OPT));
+                options.put(S3_BUCKET_NAME_LONG_OPT, cmdLine.getOptionValue(S3_BUCKET_NAME_OPT));
             } else {
                 throw new CommandLineException("-b option is missing");
             }

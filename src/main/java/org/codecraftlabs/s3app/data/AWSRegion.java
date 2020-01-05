@@ -1,6 +1,7 @@
 package org.codecraftlabs.s3app.data;
 
 import javax.annotation.Nonnull;
+import java.util.Optional;
 
 public enum AWSRegion {
     AP_EAST_1("ap-east-1", "Asia Pacific (Hong Kong)"),
@@ -39,13 +40,13 @@ public enum AWSRegion {
         return description;
     }
 
-    public static AWSRegion findByCode(String code) {
+    public static Optional<AWSRegion> findByCode(String code) {
         for (AWSRegion region : values()) {
             if (region.code().equals(code)) {
-                return region;
+                return Optional.of(region);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override

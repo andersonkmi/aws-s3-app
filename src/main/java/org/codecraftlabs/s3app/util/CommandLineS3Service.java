@@ -1,5 +1,7 @@
 package org.codecraftlabs.s3app.util;
 
+import java.util.Optional;
+
 public enum CommandLineS3Service {
     CREATE_BUCKET("createBucket"),
     LIST_BUCKET("listBucket"),
@@ -15,12 +17,12 @@ public enum CommandLineS3Service {
         return code;
     }
 
-    public static CommandLineS3Service findByCode(String code) throws IllegalArgumentException {
+    public static Optional<CommandLineS3Service> findByCode(String code) throws IllegalArgumentException {
         for (CommandLineS3Service operation : values()) {
             if (operation.code().equals(code)) {
-                return operation;
+                return Optional.of(operation);
             }
         }
-        return null;
+        return Optional.empty();
     }
 }

@@ -14,6 +14,7 @@ import org.codecraftlabs.s3app.util.InvalidArgumentException;
 import org.codecraftlabs.s3app.util.CommandLineS3Service;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.codecraftlabs.s3app.util.CommandLineUtil.AWS_REGION_LONG_OPT;
@@ -52,24 +53,22 @@ public class Main {
         String awsRegion = args.getOrDefault(AWS_REGION_LONG_OPT, "");
         String bucketName = args.getOrDefault(S3_BUCKET_NAME_LONG_OPT, "");
 
-        CommandLineS3Service operation = CommandLineS3Service.findByCode(serviceName);
-        if (CREATE_BUCKET == operation) {
-            AWSRegion region = AWSRegion.valueOf(awsRegion);
-            S3Bucket bucket = new S3Bucket(bucketName, region);
+        Optional<CommandLineS3Service> operation = CommandLineS3Service.findByCode(serviceName);
+        if (operation.isPresent() && CREATE_BUCKET == operation.get()) {
+            Optional<AWSRegion> region = AWSRegion.findByCode(awsRegion);
+            S3Bucket bucket = new S3Bucket(bucketName, region.orElseThrow());
             S3BucketCreateService service = new S3BucketCreateService();
             service.create(bucket);
-        } else if (DELETE_BUCKET == operation) {
-            AWSRegion region = AWSRegion.valueOf(awsRegion);
-            S3Bucket bucket = new S3Bucket(bucketName, region);
+        } else if (operation.isPresent() && DELETE_BUCKET == operation.get()) {
+            Optional<AWSRegion> region = AWSRegion.findByCode(awsRegion);
+            S3Bucket bucket = new S3Bucket(bucketName, region.orElseThrow());
             S3BucketDeleteService service = new S3BucketDeleteService();
             service.remove(bucket);
-        } else if (LIST_BUCKET == operation) {
-            AWSRegion region = AWSRegion.findByCode(awsRegion);
-            if (region != null) {
-                S3BucketListService service = new S3BucketListService();
-                Set<S3Bucket> buckets = service.buckets(region);
-                buckets.forEach(logger::info);
-            }
+        } else if (operation.isPresent() && LIST_BUCKET == operation.get()) {
+            Optional<AWSRegion> region = AWSRegion.findByCode(awsRegion);
+            S3BucketListService service = new S3BucketListService();
+            Set<S3Bucket> buckets = service.buckets(region.orElseThrow());
+            buckets.forEach(logger::info);
         } else {
             logger.warn("No action performed");
         }

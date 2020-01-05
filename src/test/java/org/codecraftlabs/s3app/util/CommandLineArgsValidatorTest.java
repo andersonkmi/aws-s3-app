@@ -1,6 +1,6 @@
 package org.codecraftlabs.s3app.util;
 
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -10,68 +10,78 @@ import static org.codecraftlabs.s3app.util.CommandLineArgsValidator.validateComm
 import static org.codecraftlabs.s3app.util.CommandLineS3Service.CREATE_BUCKET;
 import static org.codecraftlabs.s3app.util.CommandLineUtil.AWS_REGION_LONG_OPT;
 import static org.codecraftlabs.s3app.util.CommandLineUtil.S3_SERVICE_LONG_OPT;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@DisplayName("CommandLineArgsValidator unit tests")
 public class CommandLineArgsValidatorTest {
     @Test
+    @DisplayName("When the arguments are valid")
     void validArgs() {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, CREATE_BUCKET.code());
         args.put(AWS_REGION_LONG_OPT, "us-east-1");
 
-        Assertions.assertDoesNotThrow(() -> validateCommandLineArgs(args));
+        assertDoesNotThrow(() -> validateCommandLineArgs(args));
     }
 
     @Test
+    @DisplayName("When the --service option has an empty value")
     void emptyServiceArgument() {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, "");
         args.put(AWS_REGION_LONG_OPT, "us-east-1");
 
-        Assertions.assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
+        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
     }
 
     @Test
+    @DisplayName("When --service option has a null value")
     void nullServiceArgument() {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, null);
         args.put(AWS_REGION_LONG_OPT, "us-east-1");
 
-        Assertions.assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
+        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
     }
 
     @Test
+    @DisplayName("When the --service option has an invalid value")
     void invalidServiceArgument() {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, "blabla");
         args.put(AWS_REGION_LONG_OPT, "us-east-1");
 
-        Assertions.assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
+        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
     }
 
     @Test
+    @DisplayName("When the --region option has an empty value")
     void emptyRegionArgument() {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, CREATE_BUCKET.code());
         args.put(AWS_REGION_LONG_OPT, "");
 
-        Assertions.assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
+        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
     }
 
     @Test
+    @DisplayName("When the --region option has a null value")
     void nullRegionArgument() {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, CREATE_BUCKET.code());
         args.put(AWS_REGION_LONG_OPT, null);
 
-        Assertions.assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
+        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
     }
 
     @Test
+    @DisplayName("When the --region option has an invalid value")
     void invalidRegionArgument() {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, CREATE_BUCKET.code());
         args.put(AWS_REGION_LONG_OPT, "invalid-code");
 
-        Assertions.assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
+        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
     }
 }

@@ -18,9 +18,7 @@ public class CommandLineArgsValidatorTest {
         args.put(S3_SERVICE_LONG_OPT, CREATE_BUCKET.code());
         args.put(AWS_REGION_LONG_OPT, "us-east-1");
 
-        Assertions.assertDoesNotThrow(() -> {
-            validateCommandLineArgs(args);
-        });
+        Assertions.assertDoesNotThrow(() -> validateCommandLineArgs(args));
     }
 
     @Test
@@ -29,9 +27,7 @@ public class CommandLineArgsValidatorTest {
         args.put(S3_SERVICE_LONG_OPT, "");
         args.put(AWS_REGION_LONG_OPT, "us-east-1");
 
-        Assertions.assertThrows(InvalidArgumentException.class, () -> {
-            validateCommandLineArgs(args);
-        });
+        Assertions.assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
     }
 
     @Test
@@ -40,9 +36,7 @@ public class CommandLineArgsValidatorTest {
         args.put(S3_SERVICE_LONG_OPT, null);
         args.put(AWS_REGION_LONG_OPT, "us-east-1");
 
-        Assertions.assertThrows(InvalidArgumentException.class, () -> {
-            validateCommandLineArgs(args);
-        });
+        Assertions.assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
     }
 
     @Test
@@ -51,9 +45,7 @@ public class CommandLineArgsValidatorTest {
         args.put(S3_SERVICE_LONG_OPT, "blabla");
         args.put(AWS_REGION_LONG_OPT, "us-east-1");
 
-        Assertions.assertThrows(InvalidArgumentException.class, () -> {
-            validateCommandLineArgs(args);
-        });
+        Assertions.assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
     }
 
     @Test
@@ -62,9 +54,7 @@ public class CommandLineArgsValidatorTest {
         args.put(S3_SERVICE_LONG_OPT, CREATE_BUCKET.code());
         args.put(AWS_REGION_LONG_OPT, "");
 
-        Assertions.assertThrows(InvalidArgumentException.class, () -> {
-            validateCommandLineArgs(args);
-        });
+        Assertions.assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
     }
 
     @Test
@@ -73,9 +63,7 @@ public class CommandLineArgsValidatorTest {
         args.put(S3_SERVICE_LONG_OPT, CREATE_BUCKET.code());
         args.put(AWS_REGION_LONG_OPT, null);
 
-        Assertions.assertThrows(InvalidArgumentException.class, () -> {
-            validateCommandLineArgs(args);
-        });
+        Assertions.assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
     }
 
     @Test
@@ -84,8 +72,6 @@ public class CommandLineArgsValidatorTest {
         args.put(S3_SERVICE_LONG_OPT, CREATE_BUCKET.code());
         args.put(AWS_REGION_LONG_OPT, "invalid-code");
 
-        Assertions.assertThrows(InvalidArgumentException.class, () -> {
-            validateCommandLineArgs(args);
-        });
+        Assertions.assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
     }
 }

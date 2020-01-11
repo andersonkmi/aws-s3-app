@@ -8,6 +8,7 @@ import org.codecraftlabs.s3app.service.AWSException;
 import org.codecraftlabs.s3app.service.S3BucketCreateService;
 import org.codecraftlabs.s3app.service.S3BucketDeleteService;
 import org.codecraftlabs.s3app.service.S3BucketListService;
+import org.codecraftlabs.s3app.service.S3ObjectListService;
 import org.codecraftlabs.s3app.util.CommandLineException;
 import org.codecraftlabs.s3app.util.CommandLineUtil;
 import org.codecraftlabs.s3app.util.InvalidArgumentException;
@@ -17,6 +18,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import static org.codecraftlabs.s3app.util.CommandLineS3Service.LIST_OBJECTS;
 import static org.codecraftlabs.s3app.util.CommandLineUtil.AWS_REGION_LONG_OPT;
 import static org.codecraftlabs.s3app.util.CommandLineUtil.S3_BUCKET_NAME_LONG_OPT;
 import static org.codecraftlabs.s3app.util.CommandLineUtil.S3_SERVICE_LONG_OPT;
@@ -69,6 +71,12 @@ public class Main {
             S3BucketListService service = new S3BucketListService();
             Set<S3Bucket> buckets = service.buckets(region.orElseThrow());
             buckets.forEach(logger::info);
+        } else if (operation.isPresent() && LIST_OBJECTS == operation.get()) {
+            var region = AWSRegion.findByCode(awsRegion);
+            var service = new S3ObjectListService();
+            var bucket = new S3Bucket(bucketName, region.orElseThrow());
+            var results = service.list(bucket);
+            results.forEach(logger::info);
         } else {
             logger.warn("No action performed");
         }

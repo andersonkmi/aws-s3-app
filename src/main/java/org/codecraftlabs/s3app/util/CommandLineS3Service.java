@@ -3,6 +3,7 @@ package org.codecraftlabs.s3app.util;
 import java.util.Optional;
 
 public enum CommandLineS3Service {
+    LIST_OBJECTS("listObjects"),
     CREATE_BUCKET("createBucket"),
     LIST_BUCKET("listBucket"),
     DELETE_BUCKET("deleteBucket");

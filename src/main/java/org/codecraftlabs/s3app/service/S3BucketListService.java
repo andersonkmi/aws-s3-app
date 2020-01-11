@@ -8,7 +8,6 @@ import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.core.exception.SdkClientException;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.ListBucketsRequest;
-import software.amazon.awssdk.services.s3.model.ListBucketsResponse;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
@@ -22,9 +21,9 @@ public class S3BucketListService {
     public Set<S3Bucket> buckets(@Nonnull final AWSRegion region) throws AWSException {
         try {
             logger.info(String.format("Listing all buckets from region '%s'", region.code()));
-            S3Client s3Client = S3Client.builder().region(awsRegion(region)).build();
-            ListBucketsRequest request = ListBucketsRequest.builder().build();
-            ListBucketsResponse response = s3Client.listBuckets(request);
+            var s3Client = S3Client.builder().region(awsRegion(region)).build();
+            var request = ListBucketsRequest.builder().build();
+            var response = s3Client.listBuckets(request);
             return response.buckets().stream().map(bucket -> new S3Bucket(bucket.name(), bucket.creationDate())).collect(Collectors.toSet());
         } catch (AwsServiceException | SdkClientException exception) {
             logger.warn("Error when listing buckets", exception);

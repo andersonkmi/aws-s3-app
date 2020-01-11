@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.codecraftlabs.s3app.data.S3Bucket;
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.core.exception.SdkClientException;
-import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.CreateBucketRequest;
 
@@ -19,9 +18,9 @@ public class S3BucketCreateService {
     public void create(@Nonnull final S3Bucket bucket) throws AWSException {
         logger.info(String.format("Creating a new S3 bucket: '%s'", bucket.name()));
         try {
-            Region selectedRegion = awsRegion(bucket.region());
-            S3Client s3Client = S3Client.builder().region(selectedRegion).build();
-            CreateBucketRequest request = CreateBucketRequest
+            var selectedRegion = awsRegion(bucket.region());
+            var s3Client = S3Client.builder().region(selectedRegion).build();
+            var request = CreateBucketRequest
                     .builder()
                     .bucket(bucket.name())
                     .build();

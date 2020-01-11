@@ -16,7 +16,6 @@ import org.codecraftlabs.s3app.util.CommandLineS3Service;
 
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.codecraftlabs.s3app.util.CommandLineS3Service.LIST_OBJECTS;
 import static org.codecraftlabs.s3app.util.CommandLineUtil.AWS_REGION_LONG_OPT;

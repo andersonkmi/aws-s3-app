@@ -34,10 +34,10 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            CommandLineUtil cmdLineUtil = new CommandLineUtil();
+            var cmdLineUtil = new CommandLineUtil();
             cmdLineUtil.parse(args);
 
-            Map<String, String> arguments = cmdLineUtil.options();
+            var arguments = cmdLineUtil.options();
             validateCommandLineArgs(arguments);
             execute(arguments);
         } catch (AWSException exception) {
@@ -51,25 +51,25 @@ public class Main {
     }
 
     private static void execute(Map<String, String> args) throws AWSException {
-        String serviceName = args.getOrDefault(S3_SERVICE_LONG_OPT, "");
-        String awsRegion = args.getOrDefault(AWS_REGION_LONG_OPT, "");
-        String bucketName = args.getOrDefault(S3_BUCKET_NAME_LONG_OPT, "");
+        var serviceName = args.getOrDefault(S3_SERVICE_LONG_OPT, "");
+        var awsRegion = args.getOrDefault(AWS_REGION_LONG_OPT, "");
+        var bucketName = args.getOrDefault(S3_BUCKET_NAME_LONG_OPT, "");
 
         Optional<CommandLineS3Service> operation = CommandLineS3Service.findByCode(serviceName);
         if (operation.isPresent() && CREATE_BUCKET == operation.get()) {
-            Optional<AWSRegion> region = AWSRegion.findByCode(awsRegion);
-            S3Bucket bucket = new S3Bucket(bucketName, region.orElseThrow());
-            S3BucketCreateService service = new S3BucketCreateService();
+            var region = AWSRegion.findByCode(awsRegion);
+            var bucket = new S3Bucket(bucketName, region.orElseThrow());
+            var service = new S3BucketCreateService();
             service.create(bucket);
         } else if (operation.isPresent() && DELETE_BUCKET == operation.get()) {
-            Optional<AWSRegion> region = AWSRegion.findByCode(awsRegion);
-            S3Bucket bucket = new S3Bucket(bucketName, region.orElseThrow());
-            S3BucketDeleteService service = new S3BucketDeleteService();
+            var region = AWSRegion.findByCode(awsRegion);
+            var bucket = new S3Bucket(bucketName, region.orElseThrow());
+            var service = new S3BucketDeleteService();
             service.remove(bucket);
         } else if (operation.isPresent() && LIST_BUCKET == operation.get()) {
-            Optional<AWSRegion> region = AWSRegion.findByCode(awsRegion);
-            S3BucketListService service = new S3BucketListService();
-            Set<S3Bucket> buckets = service.buckets(region.orElseThrow());
+            var region = AWSRegion.findByCode(awsRegion);
+            var service = new S3BucketListService();
+            var buckets = service.buckets(region.orElseThrow());
             buckets.forEach(logger::info);
         } else if (operation.isPresent() && LIST_OBJECTS == operation.get()) {
             var region = AWSRegion.findByCode(awsRegion);

@@ -25,14 +25,14 @@ public class CommandLineArgsValidator {
     }
 
     private static void validateServiceOption(String value) throws InvalidArgumentException {
-        Optional<CommandLineS3Service> operation = CommandLineS3Service.findByCode(value);
+        var operation = CommandLineS3Service.findByCode(value);
         if (operation.isEmpty()) {
             throw new InvalidArgumentException(String.format("Invalid service: '%s'", value));
         }
     }
 
     private static void validateRegionOption(String regionValue) throws InvalidArgumentException {
-        Optional<AWSRegion> region = AWSRegion.findByCode(regionValue);
+        var region = AWSRegion.findByCode(regionValue);
         if (region.isEmpty()) {
             throw new InvalidArgumentException(String.format("Invalid region: '%s'", regionValue));
         }

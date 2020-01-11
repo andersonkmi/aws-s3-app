@@ -41,7 +41,7 @@ public enum AWSRegion {
     }
 
     public static Optional<AWSRegion> findByCode(String code) {
-        for (AWSRegion region : values()) {
+        for (var region : values()) {
             if (region.code().equals(code)) {
                 return Optional.of(region);
             }

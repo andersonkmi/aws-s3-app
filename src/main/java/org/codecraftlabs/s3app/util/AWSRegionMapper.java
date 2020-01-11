@@ -12,7 +12,7 @@ public class AWSRegionMapper {
 
     public static Region awsRegion(@Nonnull AWSRegion from) {
         logger.debug(String.format("Mapping region '%s - %s'", from.code(), from.description()));
-        Region to = Region.of(from.code());
+        var to = Region.of(from.code());
         if (to == null) {
             logger.info("Could not map to an existing AWS region. Defaulting to US_EAST_1");
             return Region.US_EAST_1;

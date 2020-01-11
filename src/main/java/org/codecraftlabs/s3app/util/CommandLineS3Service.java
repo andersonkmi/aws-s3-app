@@ -19,7 +19,7 @@ public enum CommandLineS3Service {
     }
 
     public static Optional<CommandLineS3Service> findByCode(String code) throws IllegalArgumentException {
-        for (CommandLineS3Service operation : values()) {
+        for (var operation : values()) {
             if (operation.code().equals(code)) {
                 return Optional.of(operation);
             }

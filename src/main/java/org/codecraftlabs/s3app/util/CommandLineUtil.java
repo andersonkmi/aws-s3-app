@@ -30,8 +30,8 @@ public class CommandLineUtil {
 
     public void parse(String[] args) throws CommandLineException {
         try {
-            CommandLineParser cmdLineParser = new DefaultParser();
-            CommandLine cmdLine = cmdLineParser.parse(cmdLineOpts, args);
+            var cmdLineParser = new DefaultParser();
+            var cmdLine = cmdLineParser.parse(cmdLineOpts, args);
 
             options.put(S3_SERVICE_LONG_OPT, cmdLine.getOptionValue(S3_SERVICE_OPT));
             options.put(AWS_REGION_LONG_OPT, cmdLine.getOptionValue(AWS_REGION_OPT));
@@ -50,9 +50,9 @@ public class CommandLineUtil {
     }
 
     public static void help() {
-        HelpFormatter helpFormatter = new HelpFormatter();
-        String header = "\nAWS S3 sandbox app\n";
-        String footer = "\nThank you for using\n";
+        var helpFormatter = new HelpFormatter();
+        var header = "\nAWS S3 sandbox app\n";
+        var footer = "\nThank you for using\n";
         helpFormatter.printHelp("java -jar aws-s3-app.jar", header, cmdLineOpts, footer, true);
     }
 }

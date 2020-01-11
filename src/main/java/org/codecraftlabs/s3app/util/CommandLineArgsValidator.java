@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.codecraftlabs.s3app.data.AWSRegion;
 
 import java.util.Map;
-import java.util.Optional;
 
 import static org.codecraftlabs.s3app.util.CommandLineUtil.AWS_REGION_LONG_OPT;
 import static org.codecraftlabs.s3app.util.CommandLineUtil.S3_SERVICE_LONG_OPT;

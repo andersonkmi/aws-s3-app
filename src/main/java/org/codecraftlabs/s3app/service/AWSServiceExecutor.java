@@ -6,6 +6,7 @@ import org.codecraftlabs.s3app.data.AWSRegion;
 import org.codecraftlabs.s3app.data.S3Bucket;
 import org.codecraftlabs.s3app.util.CommandLineS3Service;
 
+import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.Optional;
 
@@ -38,10 +39,7 @@ public class AWSServiceExecutor {
             var service = new S3BucketDeleteService();
             service.remove(bucket);
         } else if (operation.isPresent() && LIST_BUCKET == operation.get()) {
-            var region = AWSRegion.findByCode(awsRegion);
-            var service = new S3BucketListService();
-            var buckets = service.buckets(region.orElseThrow());
-            buckets.forEach(logger::info);
+            runListBucketService(awsRegion);
         } else if (operation.isPresent() && LIST_OBJECTS == operation.get()) {
             var region = AWSRegion.findByCode(awsRegion);
             var service = new S3ObjectListService();
@@ -51,5 +49,12 @@ public class AWSServiceExecutor {
         } else {
             logger.warn("No action performed");
         }
+    }
+
+    private static void runListBucketService(@Nonnull String awsRegion) throws AWSException {
+        var region = AWSRegion.findByCode(awsRegion);
+        var service = new S3BucketListService();
+        var buckets = service.buckets(region.orElseThrow());
+        buckets.forEach(logger::info);
     }
 }

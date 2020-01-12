@@ -51,9 +51,9 @@ public class S3Object {
     @Override
     public String toString() {
         return "{" +
-                "\"key\":\"" + key + "\", " +
-                "\"eTag\":\"" + eTag + "\", " +
-                "\"lastModified\":\"" + lastModified.toString() +
+                "\"key\":\"" + key() + "\", " +
+                "\"eTag\":\"" + eTag() + "\", " +
+                "\"lastModified\":\"" + lastModified().toString() +
                 "\"}";
     }
 }

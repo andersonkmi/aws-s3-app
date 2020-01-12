@@ -21,7 +21,6 @@ import static org.codecraftlabs.s3app.util.CommandLineUtil.S3_SERVICE_LONG_OPT;
 public class AWSServiceExecutor {
     private static final Logger logger = LogManager.getLogger(AWSServiceExecutor.class);
 
-    // todo: break the if-else into separate methods
     public static void execute(Map<String, String> args) throws AWSException {
         var serviceName = args.getOrDefault(S3_SERVICE_LONG_OPT, "");
         var awsRegion = args.getOrDefault(AWS_REGION_LONG_OPT, "");

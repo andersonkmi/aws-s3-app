@@ -29,23 +29,13 @@ public class AWSServiceExecutor {
 
         Optional<CommandLineS3Service> operation = CommandLineS3Service.findByCode(serviceName);
         if (operation.isPresent() && CREATE_BUCKET == operation.get()) {
-            var region = AWSRegion.findByCode(awsRegion);
-            var bucket = new S3Bucket(bucketName, region.orElseThrow());
-            var service = new S3BucketCreateService();
-            service.create(bucket);
+            runCreateBucketService(awsRegion, bucketName);
         } else if (operation.isPresent() && DELETE_BUCKET == operation.get()) {
-            var region = AWSRegion.findByCode(awsRegion);
-            var bucket = new S3Bucket(bucketName, region.orElseThrow());
-            var service = new S3BucketDeleteService();
-            service.remove(bucket);
+            runDeleteBucketService(awsRegion, bucketName);
         } else if (operation.isPresent() && LIST_BUCKET == operation.get()) {
             runListBucketService(awsRegion);
         } else if (operation.isPresent() && LIST_OBJECTS == operation.get()) {
-            var region = AWSRegion.findByCode(awsRegion);
-            var service = new S3ObjectListService();
-            var bucket = new S3Bucket(bucketName, region.orElseThrow());
-            var results = service.list(bucket);
-            results.forEach(logger::info);
+            runListObjectsService(awsRegion, bucketName);
         } else {
             logger.warn("No action performed");
         }
@@ -56,5 +46,27 @@ public class AWSServiceExecutor {
         var service = new S3BucketListService();
         var buckets = service.buckets(region.orElseThrow());
         buckets.forEach(logger::info);
+    }
+
+    private static void runCreateBucketService(@Nonnull String awsRegion, @Nonnull String bucketName) throws AWSException {
+        var region = AWSRegion.findByCode(awsRegion);
+        var bucket = new S3Bucket(bucketName, region.orElseThrow());
+        var service = new S3BucketCreateService();
+        service.create(bucket);
+    }
+
+    private static void runDeleteBucketService(@Nonnull String awsRegion, @Nonnull String bucketName) throws AWSException {
+        var region = AWSRegion.findByCode(awsRegion);
+        var bucket = new S3Bucket(bucketName, region.orElseThrow());
+        var service = new S3BucketDeleteService();
+        service.remove(bucket);
+    }
+
+    private static void runListObjectsService(@Nonnull String awsRegion, @Nonnull String bucketName) throws AWSException {
+        var region = AWSRegion.findByCode(awsRegion);
+        var service = new S3ObjectListService();
+        var bucket = new S3Bucket(bucketName, region.orElseThrow());
+        var results = service.list(bucket);
+        results.forEach(logger::info);
     }
 }

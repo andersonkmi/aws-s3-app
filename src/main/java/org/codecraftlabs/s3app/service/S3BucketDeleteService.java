@@ -24,8 +24,9 @@ class S3BucketDeleteService {
             s3Client.deleteBucket(request);
             logger.info(String.format("S3 bucket '%s' deleted!", bucket.name()));
         } catch (AwsServiceException | SdkClientException exception) {
-            logger.warn("Error when deleting a bucket", exception);
-            throw new AWSException("Error when deleting a bucket", exception);
+            String errorMessage = "Error when deleting a bucket";
+            logger.warn(errorMessage, exception);
+            throw new AWSException(errorMessage, exception);
         }
     }
 }

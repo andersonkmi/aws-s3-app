@@ -27,8 +27,9 @@ class S3BucketCreateService {
             s3Client.createBucket(request);
             logger.info(String.format("S3 bucket '%s' created!", bucket.name()));
         } catch (AwsServiceException | SdkClientException exception) {
-            logger.warn("Error when creating a new bucket", exception);
-            throw new AWSException("Error when deleting a new bucket", exception);
+            String errorMessage = "Error when creating a new bucket";
+            logger.warn(errorMessage, exception);
+            throw new AWSException(errorMessage, exception);
         }
     }
 }

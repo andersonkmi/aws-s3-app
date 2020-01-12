@@ -19,6 +19,7 @@ class S3BucketListService {
     private static final Logger logger = LogManager.getLogger(S3BucketListService.class);
 
     public Set<S3Bucket> buckets(@Nonnull final AWSRegion region) throws AWSException {
+
         try {
             logger.info(String.format("Listing all buckets from region '%s'", region.code()));
             var s3Client = S3Client.builder().region(awsRegion(region)).build();
@@ -26,8 +27,9 @@ class S3BucketListService {
             var response = s3Client.listBuckets(request);
             return response.buckets().stream().map(bucket -> new S3Bucket(bucket.name(), bucket.creationDate())).collect(Collectors.toSet());
         } catch (AwsServiceException | SdkClientException exception) {
-            logger.warn("Error when listing buckets", exception);
-            throw new AWSException("Error when listing buckets", exception);
+            String errorMessage = "Error when listing buckets";
+            logger.warn(errorMessage, exception);
+            throw new AWSException(errorMessage, exception);
         }
     }
 

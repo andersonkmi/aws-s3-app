@@ -27,8 +27,9 @@ class S3ObjectListService {
             var items = s3Objects.contents();
             return items.stream().map(item -> new S3Object(item.key(), item.eTag(), item.lastModified())).collect(Collectors.toSet());
         } catch (AwsServiceException | SdkClientException exception) {
-            logger.warn("Error when listing objects", exception);
-            throw new AWSException("Error when listing objects", exception);
+            String errorMessage = "Error when listing objects";
+            logger.warn(errorMessage, exception);
+            throw new AWSException(errorMessage, exception);
         }
     }
 }

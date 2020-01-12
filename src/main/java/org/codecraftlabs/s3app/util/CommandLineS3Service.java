@@ -2,6 +2,9 @@ package org.codecraftlabs.s3app.util;
 
 import java.util.Optional;
 
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+
 public enum CommandLineS3Service {
     LIST_OBJECTS("listObjects"),
     CREATE_BUCKET("createBucket"),
@@ -21,9 +24,9 @@ public enum CommandLineS3Service {
     public static Optional<CommandLineS3Service> findByCode(String code) throws IllegalArgumentException {
         for (var operation : values()) {
             if (operation.code().equals(code)) {
-                return Optional.of(operation);
+                return of(operation);
             }
         }
-        return Optional.empty();
+        return empty();
     }
 }

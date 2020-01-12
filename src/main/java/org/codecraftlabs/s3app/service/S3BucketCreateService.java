@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
 
 import static org.codecraftlabs.s3app.util.AWSRegionMapper.awsRegion;
 
-public class S3BucketCreateService {
+class S3BucketCreateService {
     private static final Logger logger = LogManager.getLogger(S3BucketCreateService.class);
 
     public void create(@Nonnull final S3Bucket bucket) throws AWSException {

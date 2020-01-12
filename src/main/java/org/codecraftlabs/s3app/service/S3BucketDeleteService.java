@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
 
 import static org.codecraftlabs.s3app.util.AWSRegionMapper.awsRegion;
 
-public class S3BucketDeleteService {
+class S3BucketDeleteService {
     private static final Logger logger = LogManager.getLogger(S3BucketDeleteService.class);
 
     public void remove(@Nonnull final S3Bucket bucket) throws AWSException {

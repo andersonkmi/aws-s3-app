@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 import static org.codecraftlabs.s3app.util.AWSRegionMapper.awsRegion;
 
-public class S3ObjectListService {
+class S3ObjectListService {
     private static final Logger logger = LogManager.getLogger(S3ObjectListService.class);
 
     public Set<S3Object> list(@Nonnull final S3Bucket bucket) throws AWSException {

@@ -21,12 +21,12 @@ public class CommandLineUtil {
     public static final String AWS_REGION_OPT = "r";
     public static final String AWS_REGION_LONG_OPT = "region";
 
-    final private Map<String, String> options = new HashMap<>();
     final private static Options cmdLineOpts = new Options().addRequiredOption(S3_SERVICE_OPT, S3_SERVICE_LONG_OPT, true, "Select which service")
             .addRequiredOption(AWS_REGION_OPT, AWS_REGION_LONG_OPT, true, "AWS region to operate")
             .addOption(S3_BUCKET_NAME_OPT, S3_BUCKET_NAME_LONG_OPT,true, "Bucket name");
 
-    public void parse(String[] args) throws CommandLineException {
+    public static Map<String, String> parse(String[] args) throws CommandLineException {
+        final Map<String, String> options = new HashMap<>();
         try {
             var cmdLineParser = new DefaultParser();
             var cmdLine = cmdLineParser.parse(cmdLineOpts, args);
@@ -37,14 +37,12 @@ public class CommandLineUtil {
             if (cmdLine.hasOption(S3_BUCKET_NAME_OPT)) {
                 options.put(S3_BUCKET_NAME_LONG_OPT, cmdLine.getOptionValue(S3_BUCKET_NAME_OPT));
             }
+
+            return options;
         } catch (ParseException exception) {
             logger.error("Command line parse error", exception);
             throw new CommandLineException("Error when parsing command line options", exception);
         }
-    }
-
-    public Map<String, String> options() {
-        return Collections.unmodifiableMap(options);
     }
 
     public static void help() {

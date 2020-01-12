@@ -1,7 +1,5 @@
 package org.codecraftlabs.s3app.util;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
@@ -50,9 +48,8 @@ public class CommandLineUtil {
     }
 
     public static void help() {
-        var helpFormatter = new HelpFormatter();
         var header = "\nAWS S3 sandbox app\n";
         var footer = "\nThank you for using\n";
-        helpFormatter.printHelp("java -jar aws-s3-app.jar", header, cmdLineOpts, footer, true);
+        new HelpFormatter().printHelp("java -jar aws-s3-app.jar", header, cmdLineOpts, footer, true);
     }
 }

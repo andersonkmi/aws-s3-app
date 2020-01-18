@@ -22,6 +22,7 @@ public class AWSServiceExecutor {
     private static final Logger logger = LogManager.getLogger(AWSServiceExecutor.class);
 
     public static void execute(AppArguments args) throws AWSException {
+        logger.info("Executing AWS service");
         var serviceName = args.option(SERVICE_OPTION);
         var awsRegion = args.option(REGION_OPTION);
         var bucketName = args.option(BUCKET_OPTION);

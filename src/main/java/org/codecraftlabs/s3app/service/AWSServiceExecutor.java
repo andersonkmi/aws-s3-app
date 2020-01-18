@@ -46,6 +46,7 @@ public class AWSServiceExecutor {
         var service = new S3BucketListService();
         var buckets = service.buckets(region.orElseThrow());
         buckets.forEach(logger::info);
+        buckets.forEach(System.out::println);
     }
 
     private static void runCreateBucketService(@Nonnull String awsRegion, @Nonnull String bucketName) throws AWSException {
@@ -68,5 +69,6 @@ public class AWSServiceExecutor {
         var bucket = new S3Bucket(bucketName, region.orElseThrow());
         var results = service.list(bucket);
         results.forEach(logger::info);
+        results.forEach(System.out::println);
     }
 }

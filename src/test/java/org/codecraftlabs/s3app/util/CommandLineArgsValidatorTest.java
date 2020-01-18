@@ -21,8 +21,9 @@ public class CommandLineArgsValidatorTest {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, CREATE_BUCKET.code());
         args.put(AWS_REGION_LONG_OPT, "us-east-1");
+        var appArgs = new AppArguments(args);
 
-        assertDoesNotThrow(() -> validateCommandLineArgs(args));
+        assertDoesNotThrow(() -> validateCommandLineArgs(appArgs));
     }
 
     @Test
@@ -31,8 +32,9 @@ public class CommandLineArgsValidatorTest {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, "");
         args.put(AWS_REGION_LONG_OPT, "us-east-1");
+        var appArgs = new AppArguments(args);
 
-        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
+        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(appArgs));
     }
 
     @Test
@@ -41,8 +43,9 @@ public class CommandLineArgsValidatorTest {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, null);
         args.put(AWS_REGION_LONG_OPT, "us-east-1");
+        var appArgs = new AppArguments(args);
 
-        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
+        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(appArgs));
     }
 
     @Test
@@ -51,8 +54,9 @@ public class CommandLineArgsValidatorTest {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, "blabla");
         args.put(AWS_REGION_LONG_OPT, "us-east-1");
+        var appArgs = new AppArguments(args);
 
-        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
+        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(appArgs));
     }
 
     @Test
@@ -61,8 +65,9 @@ public class CommandLineArgsValidatorTest {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, CREATE_BUCKET.code());
         args.put(AWS_REGION_LONG_OPT, "");
+        var appArgs = new AppArguments(args);
 
-        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
+        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(appArgs));
     }
 
     @Test
@@ -71,8 +76,9 @@ public class CommandLineArgsValidatorTest {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, CREATE_BUCKET.code());
         args.put(AWS_REGION_LONG_OPT, null);
+        var appArgs = new AppArguments(args);
 
-        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
+        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(appArgs));
     }
 
     @Test
@@ -81,7 +87,8 @@ public class CommandLineArgsValidatorTest {
         Map<String, String> args = new HashMap<>();
         args.put(S3_SERVICE_LONG_OPT, CREATE_BUCKET.code());
         args.put(AWS_REGION_LONG_OPT, "invalid-code");
+        var appArgs = new AppArguments(args);
 
-        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(args));
+        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(appArgs));
     }
 }

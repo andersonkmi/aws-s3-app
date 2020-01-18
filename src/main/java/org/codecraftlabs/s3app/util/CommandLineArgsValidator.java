@@ -4,23 +4,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codecraftlabs.s3app.data.AWSRegion;
 
-import java.util.Map;
+import javax.annotation.Nonnull;
 
-import static org.codecraftlabs.s3app.util.CommandLineUtil.AWS_REGION_LONG_OPT;
-import static org.codecraftlabs.s3app.util.CommandLineUtil.S3_SERVICE_LONG_OPT;
+import static org.codecraftlabs.s3app.util.AppArguments.REGION_OPTION;
+import static org.codecraftlabs.s3app.util.AppArguments.SERVICE_OPTION;
 
 public class CommandLineArgsValidator {
     private static final Logger logger = LogManager.getLogger(CommandLineArgsValidator.class);
 
-    public static void validateCommandLineArgs(Map<String, String> args) throws InvalidArgumentException {
+    public static void validateCommandLineArgs(@Nonnull AppArguments args) throws InvalidArgumentException {
         logger.info("Command line validation in progress");
 
-        if (args == null || args.isEmpty()) {
-            return;
-        }
-
-        validateServiceOption(args.get(S3_SERVICE_LONG_OPT));
-        validateRegionOption(args.get(AWS_REGION_LONG_OPT));
+        validateServiceOption(args.option(SERVICE_OPTION));
+        validateRegionOption(args.option(REGION_OPTION));
     }
 
     private static void validateServiceOption(String value) throws InvalidArgumentException {

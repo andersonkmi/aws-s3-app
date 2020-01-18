@@ -3,15 +3,12 @@ package org.codecraftlabs.s3app.util;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
-
-import static org.codecraftlabs.s3app.util.CommandLineUtil.AWS_REGION_LONG_OPT;
-import static org.codecraftlabs.s3app.util.CommandLineUtil.S3_BUCKET_NAME_LONG_OPT;
-import static org.codecraftlabs.s3app.util.CommandLineUtil.S3_SERVICE_LONG_OPT;
+import static org.codecraftlabs.s3app.util.AppArguments.BUCKET_OPTION;
+import static org.codecraftlabs.s3app.util.AppArguments.REGION_OPTION;
+import static org.codecraftlabs.s3app.util.AppArguments.SERVICE_OPTION;
 import static org.codecraftlabs.s3app.util.CommandLineUtil.parse;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasEntry;
-import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -22,13 +19,10 @@ public class CommandLineUtilTest {
     void parseArgsOk() {
         String[] args = {"-s", "listBucket", "-r", "us-east-1", "-b", "test"};
         assertDoesNotThrow(() -> {
-            Map<String, String> options = parse(args);
-            assertThat(options, hasKey(S3_SERVICE_LONG_OPT));
-            assertThat(options, hasEntry(S3_SERVICE_LONG_OPT, "listBucket"));
-            assertThat(options, hasKey(AWS_REGION_LONG_OPT));
-            assertThat(options, hasEntry(AWS_REGION_LONG_OPT, "us-east-1"));
-            assertThat(options, hasKey(S3_BUCKET_NAME_LONG_OPT));
-            assertThat(options, hasEntry(S3_BUCKET_NAME_LONG_OPT, "test"));
+            var options = parse(args);
+            assertThat(options.option(SERVICE_OPTION), is("listBucket"));
+            assertThat(options.option(REGION_OPTION), is("us-east-1"));
+            assertThat(options.option(BUCKET_OPTION), is("test"));
         });
     }
 
@@ -37,11 +31,9 @@ public class CommandLineUtilTest {
     void parseArgsMinimumRequiredOk() {
         String[] args = {"-s", "listBucket", "-r", "us-east-1"};
         assertDoesNotThrow(() -> {
-            Map<String, String> options = parse(args);
-            assertThat(options, hasKey(S3_SERVICE_LONG_OPT));
-            assertThat(options, hasEntry(S3_SERVICE_LONG_OPT, "listBucket"));
-            assertThat(options, hasKey(AWS_REGION_LONG_OPT));
-            assertThat(options, hasEntry(AWS_REGION_LONG_OPT, "us-east-1"));
+            var options = parse(args);
+            assertThat(options.option(SERVICE_OPTION), is("listBucket"));
+            assertThat(options.option(REGION_OPTION), is("us-east-1"));
         });
     }
 

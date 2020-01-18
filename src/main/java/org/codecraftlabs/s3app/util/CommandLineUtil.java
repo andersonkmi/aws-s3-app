@@ -7,7 +7,6 @@ import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +24,7 @@ public class CommandLineUtil {
             .addRequiredOption(AWS_REGION_OPT, AWS_REGION_LONG_OPT, true, "AWS region to operate")
             .addOption(S3_BUCKET_NAME_OPT, S3_BUCKET_NAME_LONG_OPT,true, "Bucket name");
 
-    public static Map<String, String> parse(String[] args) throws CommandLineException {
+    public static AppArguments parse(String[] args) throws CommandLineException {
         final Map<String, String> options = new HashMap<>();
         try {
             var cmdLineParser = new DefaultParser();
@@ -38,7 +37,7 @@ public class CommandLineUtil {
                 options.put(S3_BUCKET_NAME_LONG_OPT, cmdLine.getOptionValue(S3_BUCKET_NAME_OPT));
             }
 
-            return options;
+            return new AppArguments(options);
         } catch (ParseException exception) {
             logger.error("Command line parse error", exception);
             throw new CommandLineException("Error when parsing command line options", exception);

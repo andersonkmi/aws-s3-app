@@ -8,7 +8,7 @@ import static java.util.Optional.of;
 public enum CommandLineS3Service {
     LIST_OBJECTS("listObjects"),
     CREATE_BUCKET("createBucket"),
-    LIST_BUCKET("listBucket"),
+    LIST_BUCKETS("listBuckets"),
     DELETE_BUCKET("deleteBucket");
 
     private String code;

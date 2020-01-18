@@ -15,7 +15,7 @@ import static org.codecraftlabs.s3app.util.AppArguments.REGION_OPTION;
 import static org.codecraftlabs.s3app.util.AppArguments.SERVICE_OPTION;
 import static org.codecraftlabs.s3app.util.CommandLineS3Service.CREATE_BUCKET;
 import static org.codecraftlabs.s3app.util.CommandLineS3Service.DELETE_BUCKET;
-import static org.codecraftlabs.s3app.util.CommandLineS3Service.LIST_BUCKET;
+import static org.codecraftlabs.s3app.util.CommandLineS3Service.LIST_BUCKETS;
 import static org.codecraftlabs.s3app.util.CommandLineS3Service.LIST_OBJECTS;
 
 public class AWSServiceExecutor {
@@ -31,7 +31,7 @@ public class AWSServiceExecutor {
             runCreateBucketService(awsRegion, bucketName);
         } else if (operation.isPresent() && DELETE_BUCKET == operation.get()) {
             runDeleteBucketService(awsRegion, bucketName);
-        } else if (operation.isPresent() && LIST_BUCKET == operation.get()) {
+        } else if (operation.isPresent() && LIST_BUCKETS == operation.get()) {
             runListBucketService(awsRegion);
         } else if (operation.isPresent() && LIST_OBJECTS == operation.get()) {
             runListObjectsService(awsRegion, bucketName);

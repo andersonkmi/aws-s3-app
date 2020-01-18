@@ -17,10 +17,10 @@ public class CommandLineUtilTest {
     @Test
     @DisplayName("When the args are all ok")
     void parseArgsOk() {
-        String[] args = {"-s", "listBucket", "-r", "us-east-1", "-b", "test"};
+        String[] args = {"-s", "listBuckets", "-r", "us-east-1", "-b", "test"};
         assertDoesNotThrow(() -> {
             var options = parse(args);
-            assertThat(options.option(SERVICE_OPTION), is("listBucket"));
+            assertThat(options.option(SERVICE_OPTION), is("listBuckets"));
             assertThat(options.option(REGION_OPTION), is("us-east-1"));
             assertThat(options.option(BUCKET_OPTION), is("test"));
         });
@@ -29,10 +29,10 @@ public class CommandLineUtilTest {
     @Test
     @DisplayName("When the args are all ok")
     void parseArgsMinimumRequiredOk() {
-        String[] args = {"-s", "listBucket", "-r", "us-east-1"};
+        String[] args = {"-s", "listBuckets", "-r", "us-east-1"};
         assertDoesNotThrow(() -> {
             var options = parse(args);
-            assertThat(options.option(SERVICE_OPTION), is("listBucket"));
+            assertThat(options.option(SERVICE_OPTION), is("listBuckets"));
             assertThat(options.option(REGION_OPTION), is("us-east-1"));
         });
     }
@@ -47,7 +47,7 @@ public class CommandLineUtilTest {
     @Test
     @DisplayName("When -r option is missing")
     void missingRegionOption() {
-        String[] args = {"-s", "listBucket", "-b", "test"};
+        String[] args = {"-s", "listBuckets", "-b", "test"};
         assertThrows(CommandLineException.class, () -> parse(args));
     }
 }

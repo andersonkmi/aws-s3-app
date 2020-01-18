@@ -10,19 +10,20 @@ import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.codecraftlabs.s3app.util.AppArguments.BUCKET_OPTION;
+import static org.codecraftlabs.s3app.util.AppArguments.REGION_OPTION;
+import static org.codecraftlabs.s3app.util.AppArguments.SERVICE_OPTION;
+
 public class CommandLineUtil {
     private static final Logger logger = LogManager.getLogger(CommandLineUtil.class);
 
     public static final String S3_SERVICE_OPT = "s";
-    public static final String S3_SERVICE_LONG_OPT = "service";
     public static final String S3_BUCKET_NAME_OPT = "b";
-    public static final String S3_BUCKET_NAME_LONG_OPT = "bucket";
     public static final String AWS_REGION_OPT = "r";
-    public static final String AWS_REGION_LONG_OPT = "region";
 
-    final private static Options cmdLineOpts = new Options().addRequiredOption(S3_SERVICE_OPT, S3_SERVICE_LONG_OPT, true, "Select which service")
-            .addRequiredOption(AWS_REGION_OPT, AWS_REGION_LONG_OPT, true, "AWS region to operate")
-            .addOption(S3_BUCKET_NAME_OPT, S3_BUCKET_NAME_LONG_OPT,true, "Bucket name");
+    final private static Options cmdLineOpts = new Options().addRequiredOption(S3_SERVICE_OPT, SERVICE_OPTION, true, "Select which service")
+            .addRequiredOption(AWS_REGION_OPT, REGION_OPTION, true, "AWS region to operate")
+            .addOption(S3_BUCKET_NAME_OPT, BUCKET_OPTION,true, "Bucket name");
 
     public static AppArguments parse(String[] args) throws CommandLineException {
         final Map<String, String> options = new HashMap<>();
@@ -30,11 +31,11 @@ public class CommandLineUtil {
             var cmdLineParser = new DefaultParser();
             var cmdLine = cmdLineParser.parse(cmdLineOpts, args);
 
-            options.put(S3_SERVICE_LONG_OPT, cmdLine.getOptionValue(S3_SERVICE_OPT));
-            options.put(AWS_REGION_LONG_OPT, cmdLine.getOptionValue(AWS_REGION_OPT));
+            options.put(SERVICE_OPTION, cmdLine.getOptionValue(S3_SERVICE_OPT));
+            options.put(REGION_OPTION, cmdLine.getOptionValue(AWS_REGION_OPT));
 
             if (cmdLine.hasOption(S3_BUCKET_NAME_OPT)) {
-                options.put(S3_BUCKET_NAME_LONG_OPT, cmdLine.getOptionValue(S3_BUCKET_NAME_OPT));
+                options.put(BUCKET_OPTION, cmdLine.getOptionValue(S3_BUCKET_NAME_OPT));
             }
 
             return new AppArguments(options);

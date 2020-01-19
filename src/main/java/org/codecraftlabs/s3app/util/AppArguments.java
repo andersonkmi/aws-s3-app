@@ -7,6 +7,7 @@ public class AppArguments {
     public static final String BUCKET_OPTION = "bucket";
     public static final String REGION_OPTION = "region";
     public static final String OBJECT_OPTION = "object";
+    public static final String KEY_OPTION = "key";
 
     private Map<String, String> arguments;
 

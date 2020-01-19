@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.codecraftlabs.s3app.util.AppArguments.BUCKET_OPTION;
+import static org.codecraftlabs.s3app.util.AppArguments.KEY_OPTION;
 import static org.codecraftlabs.s3app.util.AppArguments.OBJECT_OPTION;
 import static org.codecraftlabs.s3app.util.AppArguments.REGION_OPTION;
 import static org.codecraftlabs.s3app.util.AppArguments.SERVICE_OPTION;
@@ -27,10 +28,12 @@ public class CommandLineUtil {
     public static final String S3_BUCKET_NAME_OPT = "b";
     public static final String AWS_REGION_OPT = "r";
     public static final String OBJECT_NAME_OPT = "o";
+    public static final String KEY_NAME_OPT = "k";
 
     final private static Options cmdLineOpts = new Options().addRequiredOption(S3_SERVICE_OPT, SERVICE_OPTION, true, "Select which service")
             .addRequiredOption(AWS_REGION_OPT, REGION_OPTION, true, "AWS region to operate")
             .addOption(OBJECT_NAME_OPT, OBJECT_OPTION, true, "Object to upload")
+            .addOption(KEY_NAME_OPT, KEY_OPTION, true, "S3 key name")
             .addOption(S3_BUCKET_NAME_OPT, BUCKET_OPTION,true, "Bucket name");
 
     public CommandLineUtil() {
@@ -63,6 +66,10 @@ public class CommandLineUtil {
 
         if (line.hasOption(OBJECT_NAME_OPT)) {
             options.put(OBJECT_OPTION, line.getOptionValue(OBJECT_NAME_OPT));
+        }
+
+        if (line.hasOption(KEY_NAME_OPT)) {
+            options.put(KEY_OPTION, line.getOptionValue(OBJECT_NAME_OPT));
         }
     }
 

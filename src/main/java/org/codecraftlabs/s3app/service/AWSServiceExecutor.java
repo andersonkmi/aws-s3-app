@@ -9,9 +9,13 @@ import org.codecraftlabs.s3app.util.AppArguments;
 import org.codecraftlabs.s3app.util.CommandLineS3Service;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.codecraftlabs.s3app.util.AppArguments.BUCKET_OPTION;
+import static org.codecraftlabs.s3app.util.AppArguments.KEY_OPTION;
 import static org.codecraftlabs.s3app.util.AppArguments.OBJECT_OPTION;
 import static org.codecraftlabs.s3app.util.AppArguments.REGION_OPTION;
 import static org.codecraftlabs.s3app.util.AppArguments.SERVICE_OPTION;
@@ -31,6 +35,7 @@ public class AWSServiceExecutor {
         var awsRegion = args.option(REGION_OPTION);
         var bucketName = args.option(BUCKET_OPTION);
         var fileName = args.option(OBJECT_OPTION);
+        var keyName = args.option(KEY_OPTION);
 
         Optional<CommandLineS3Service> operation = findByCode(serviceName);
         if (operation.isPresent() && CREATE_BUCKET == operation.get()) {
@@ -42,7 +47,7 @@ public class AWSServiceExecutor {
         } else if (operation.isPresent() && LIST_OBJECTS == operation.get()) {
             runListObjectsService(awsRegion, bucketName);
         } else if (operation.isPresent() && UPLOAD_OBJECTS == operation.get()) {
-            runUploadObjectsService(awsRegion, bucketName, fileName);
+            runUploadObjectsService(awsRegion, bucketName, fileName, keyName);
         } else {
             logger.warn("No action performed");
         }
@@ -79,9 +84,11 @@ public class AWSServiceExecutor {
         results.forEach(System.out::println);
     }
 
-    private void runUploadObjectsService(@Nonnull String awsRegion, @Nonnull String bucketName, @Nonnull String fileName) throws AWSException {
+    private void runUploadObjectsService(@Nonnull String awsRegion, @Nonnull String bucketName, @Nonnull String fileName, @Nonnull String keyName) throws AWSException {
         var region = AWSRegion.findByCode(awsRegion);
-        var service = new S3ObjectListService();
         var bucket = new S3Bucket(bucketName, region.orElseThrow());
+        var s3Objects = Map.of(fileName, new S3Object(keyName));
+        var service = new S3UploadObjectsService();
+        service.uploadObjects(bucket, s3Objects);
     }
 }

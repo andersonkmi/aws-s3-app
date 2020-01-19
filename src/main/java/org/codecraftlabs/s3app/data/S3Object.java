@@ -6,8 +6,12 @@ import java.util.Objects;
 
 public class S3Object {
     private String key;
-    private String eTag;
-    private Instant lastModified;
+    private String eTag = "";
+    private Instant lastModified = Instant.now();
+
+    public S3Object(@Nonnull String key) {
+        this.key = key;
+    }
 
     public S3Object(@Nonnull String key, @Nonnull String eTag, @Nonnull Instant lastModified) {
         this.key = key;

@@ -30,7 +30,7 @@ public class CommandLineUtil {
 
     final private static Options cmdLineOpts = new Options().addRequiredOption(S3_SERVICE_OPT, SERVICE_OPTION, true, "Select which service")
             .addRequiredOption(AWS_REGION_OPT, REGION_OPTION, true, "AWS region to operate")
-            .addRequiredOption(OBJECT_NAME_OPT, OBJECT_OPTION, true, "Object to upload")
+            .addOption(OBJECT_NAME_OPT, OBJECT_OPTION, true, "Object to upload")
             .addOption(S3_BUCKET_NAME_OPT, BUCKET_OPTION,true, "Bucket name");
 
     public CommandLineUtil() {

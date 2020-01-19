@@ -6,6 +6,7 @@ import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
 public enum CommandLineS3Service {
+    UPLOAD_OBJECT("uploadObject"),
     LIST_OBJECTS("listObjects"),
     CREATE_BUCKET("createBucket"),
     LIST_BUCKETS("listBuckets"),

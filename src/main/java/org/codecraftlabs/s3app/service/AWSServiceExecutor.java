@@ -22,7 +22,7 @@ import static org.codecraftlabs.s3app.util.CommandLineS3Service.findByCode;
 public class AWSServiceExecutor {
     private static final Logger logger = LogManager.getLogger(AWSServiceExecutor.class);
 
-    public static void execute(AppArguments args) throws AWSException {
+    public void execute(AppArguments args) throws AWSException {
         logger.info(String.format("Executing AWS service: %s", args.option(SERVICE_OPTION)));
         var serviceName = args.option(SERVICE_OPTION);
         var awsRegion = args.option(REGION_OPTION);
@@ -42,7 +42,7 @@ public class AWSServiceExecutor {
         }
     }
 
-    private static void runListBucketService(@Nonnull String awsRegion) throws AWSException {
+    private void runListBucketService(@Nonnull String awsRegion) throws AWSException {
         var region = AWSRegion.findByCode(awsRegion);
         var service = new S3BucketListService();
         var buckets = service.buckets(region.orElseThrow());
@@ -50,21 +50,21 @@ public class AWSServiceExecutor {
         buckets.forEach(System.out::println);
     }
 
-    private static void runCreateBucketService(@Nonnull String awsRegion, @Nonnull String bucketName) throws AWSException {
+    private void runCreateBucketService(@Nonnull String awsRegion, @Nonnull String bucketName) throws AWSException {
         var region = AWSRegion.findByCode(awsRegion);
         var bucket = new S3Bucket(bucketName, region.orElseThrow());
         var service = new S3BucketCreateService();
         service.create(bucket);
     }
 
-    private static void runDeleteBucketService(@Nonnull String awsRegion, @Nonnull String bucketName) throws AWSException {
+    private void runDeleteBucketService(@Nonnull String awsRegion, @Nonnull String bucketName) throws AWSException {
         var region = AWSRegion.findByCode(awsRegion);
         var bucket = new S3Bucket(bucketName, region.orElseThrow());
         var service = new S3BucketDeleteService();
         service.remove(bucket);
     }
 
-    private static void runListObjectsService(@Nonnull String awsRegion, @Nonnull String bucketName) throws AWSException {
+    private void runListObjectsService(@Nonnull String awsRegion, @Nonnull String bucketName) throws AWSException {
         var region = AWSRegion.findByCode(awsRegion);
         var service = new S3ObjectListService();
         var bucket = new S3Bucket(bucketName, region.orElseThrow());

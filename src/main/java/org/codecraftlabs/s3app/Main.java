@@ -14,6 +14,7 @@ public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
+        logger.info("Starting app");
         try {
             var commandLineUtil = new CommandLineUtil();
             var arguments = commandLineUtil.parse(args);
@@ -23,6 +24,8 @@ public class Main {
 
             var serviceExecutor = new AWSServiceExecutor();
             serviceExecutor.execute(arguments);
+
+            logger.info("App finished");
         } catch (AWSException exception) {
             logger.error(exception.getMessage(), exception);
         } catch (InvalidArgumentException | IllegalArgumentException | CommandLineException exception) {

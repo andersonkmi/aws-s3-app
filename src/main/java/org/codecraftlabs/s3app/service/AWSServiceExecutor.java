@@ -17,17 +17,18 @@ import static org.codecraftlabs.s3app.util.CommandLineS3Service.CREATE_BUCKET;
 import static org.codecraftlabs.s3app.util.CommandLineS3Service.DELETE_BUCKET;
 import static org.codecraftlabs.s3app.util.CommandLineS3Service.LIST_BUCKETS;
 import static org.codecraftlabs.s3app.util.CommandLineS3Service.LIST_OBJECTS;
+import static org.codecraftlabs.s3app.util.CommandLineS3Service.findByCode;
 
 public class AWSServiceExecutor {
     private static final Logger logger = LogManager.getLogger(AWSServiceExecutor.class);
 
     public static void execute(AppArguments args) throws AWSException {
-        logger.info("Executing AWS service");
+        logger.info(String.format("Executing AWS service: %s", args.option(SERVICE_OPTION)));
         var serviceName = args.option(SERVICE_OPTION);
         var awsRegion = args.option(REGION_OPTION);
         var bucketName = args.option(BUCKET_OPTION);
 
-        Optional<CommandLineS3Service> operation = CommandLineS3Service.findByCode(serviceName);
+        Optional<CommandLineS3Service> operation = findByCode(serviceName);
         if (operation.isPresent() && CREATE_BUCKET == operation.get()) {
             runCreateBucketService(awsRegion, bucketName);
         } else if (operation.isPresent() && DELETE_BUCKET == operation.get()) {

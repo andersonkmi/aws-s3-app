@@ -37,10 +37,6 @@ public class CommandLineUtil {
         commandLineParser = new DefaultParser();
     }
 
-    public CommandLineUtil(@Nonnull CommandLineParser parser) {
-        commandLineParser = parser;
-    }
-
     public AppArguments parse(String[] args) throws CommandLineException {
         logger.info("Parsing command line arguments");
 

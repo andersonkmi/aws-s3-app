@@ -1,5 +1,6 @@
 package org.codecraftlabs.s3app.util;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,13 +9,19 @@ import java.util.Map;
 
 import static org.codecraftlabs.s3app.util.AppArguments.REGION_OPTION;
 import static org.codecraftlabs.s3app.util.AppArguments.SERVICE_OPTION;
-import static org.codecraftlabs.s3app.util.CommandLineArgsValidator.validateCommandLineArgs;
 import static org.codecraftlabs.s3app.util.CommandLineS3Service.CREATE_BUCKET;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("CommandLineArgsValidator unit tests")
 public class CommandLineArgsValidatorTest {
+    private CommandLineArgsValidator validator;
+
+    @BeforeEach
+    public void setup() {
+        validator = new CommandLineArgsValidator();
+    }
+
     @Test
     @DisplayName("When the arguments are valid")
     void validArgs() {
@@ -23,7 +30,7 @@ public class CommandLineArgsValidatorTest {
         args.put(REGION_OPTION, "us-east-1");
         var appArgs = new AppArguments(args);
 
-        assertDoesNotThrow(() -> validateCommandLineArgs(appArgs));
+        assertDoesNotThrow(() -> validator.validateCommandLineArgs(appArgs));
     }
 
     @Test
@@ -34,7 +41,7 @@ public class CommandLineArgsValidatorTest {
         args.put(REGION_OPTION, "us-east-1");
         var appArgs = new AppArguments(args);
 
-        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(appArgs));
+        assertThrows(InvalidArgumentException.class, () -> validator.validateCommandLineArgs(appArgs));
     }
 
     @Test
@@ -45,7 +52,7 @@ public class CommandLineArgsValidatorTest {
         args.put(REGION_OPTION, "us-east-1");
         var appArgs = new AppArguments(args);
 
-        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(appArgs));
+        assertThrows(InvalidArgumentException.class, () -> validator.validateCommandLineArgs(appArgs));
     }
 
     @Test
@@ -56,7 +63,7 @@ public class CommandLineArgsValidatorTest {
         args.put(REGION_OPTION, "us-east-1");
         var appArgs = new AppArguments(args);
 
-        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(appArgs));
+        assertThrows(InvalidArgumentException.class, () -> validator.validateCommandLineArgs(appArgs));
     }
 
     @Test
@@ -67,7 +74,7 @@ public class CommandLineArgsValidatorTest {
         args.put(REGION_OPTION, "");
         var appArgs = new AppArguments(args);
 
-        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(appArgs));
+        assertThrows(InvalidArgumentException.class, () -> validator.validateCommandLineArgs(appArgs));
     }
 
     @Test
@@ -78,7 +85,7 @@ public class CommandLineArgsValidatorTest {
         args.put(REGION_OPTION, null);
         var appArgs = new AppArguments(args);
 
-        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(appArgs));
+        assertThrows(InvalidArgumentException.class, () -> validator.validateCommandLineArgs(appArgs));
     }
 
     @Test
@@ -89,6 +96,6 @@ public class CommandLineArgsValidatorTest {
         args.put(REGION_OPTION, "invalid-code");
         var appArgs = new AppArguments(args);
 
-        assertThrows(InvalidArgumentException.class, () -> validateCommandLineArgs(appArgs));
+        assertThrows(InvalidArgumentException.class, () -> validator.validateCommandLineArgs(appArgs));
     }
 }

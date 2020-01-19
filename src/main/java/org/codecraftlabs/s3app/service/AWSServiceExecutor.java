@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codecraftlabs.s3app.data.AWSRegion;
 import org.codecraftlabs.s3app.data.S3Bucket;
+import org.codecraftlabs.s3app.data.S3Object;
 import org.codecraftlabs.s3app.util.AppArguments;
 import org.codecraftlabs.s3app.util.CommandLineS3Service;
 
@@ -79,6 +80,8 @@ public class AWSServiceExecutor {
     }
 
     private void runUploadObjectsService(@Nonnull String awsRegion, @Nonnull String bucketName, @Nonnull String fileName) throws AWSException {
-        // Implement here
+        var region = AWSRegion.findByCode(awsRegion);
+        var service = new S3ObjectListService();
+        var bucket = new S3Bucket(bucketName, region.orElseThrow());
     }
 }

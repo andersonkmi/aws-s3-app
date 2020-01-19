@@ -6,7 +6,6 @@ import org.codecraftlabs.s3app.data.S3Bucket;
 import org.codecraftlabs.s3app.data.S3Object;
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.core.exception.SdkClientException;
-import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
@@ -15,6 +14,7 @@ import java.io.File;
 import java.util.Map;
 
 import static org.codecraftlabs.s3app.util.AWSRegionMapper.awsRegion;
+import static software.amazon.awssdk.core.sync.RequestBody.fromFile;
 
 class S3UploadObjectsService {
     private static final Logger logger = LogManager.getLogger(S3UploadObjectsService.class);
@@ -31,6 +31,6 @@ class S3UploadObjectsService {
     }
 
     private void uploadFile(@Nonnull S3Client s3Client, @Nonnull String bucket, @Nonnull String fileName, @Nonnull String key) {
-        s3Client.putObject(PutObjectRequest.builder().bucket(bucket).key(key).build(), RequestBody.fromFile(new File(fileName)));
+        s3Client.putObject(PutObjectRequest.builder().bucket(bucket).key(key).build(), fromFile(new File(fileName)));
     }
 }

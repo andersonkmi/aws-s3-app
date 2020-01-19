@@ -22,7 +22,7 @@ class S3UploadObjectsService {
     public void uploadObjects(@Nonnull S3Bucket bucket, @Nonnull Map<String, S3Object> s3Objects) throws AWSException {
         try {
             var s3Client = S3Client.builder().region(awsRegion(bucket.region())).build();
-            s3Objects.entrySet().stream().forEach(item -> uploadFile(s3Client, bucket.name(), item.getKey(), item.getValue().key()));
+            s3Objects.forEach((key, value) -> uploadFile(s3Client, bucket.name(), key, value.key()));
         } catch (AwsServiceException | SdkClientException exception) {
             String errorMessage = "Error when listing objects";
             logger.warn(errorMessage, exception);

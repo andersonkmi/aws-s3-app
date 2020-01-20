@@ -8,6 +8,9 @@ import org.codecraftlabs.s3app.validator.CommandLineArgsValidator;
 import org.codecraftlabs.s3app.util.CommandLineException;
 import org.codecraftlabs.s3app.util.CommandLineUtil;
 import org.codecraftlabs.s3app.validator.InvalidArgumentException;
+import org.codecraftlabs.s3app.validator.RegionOptionValidationPolicy;
+import org.codecraftlabs.s3app.validator.ServiceOptionValidationPolicy;
+
 import static org.codecraftlabs.s3app.util.CommandLineUtil.help;
 
 public class Main {
@@ -20,7 +23,9 @@ public class Main {
             var arguments = commandLineUtil.parse(args);
 
             var cliValidator = new CommandLineArgsValidator();
-            cliValidator.validateCommandLineArgs(arguments);
+            cliValidator.add(new RegionOptionValidationPolicy());
+            cliValidator.add(new ServiceOptionValidationPolicy());
+            cliValidator.validate(arguments);
 
             var serviceExecutor = new AWSServiceExecutor();
             serviceExecutor.execute(arguments);

@@ -4,6 +4,6 @@ import org.codecraftlabs.s3app.util.AppArguments;
 
 import javax.annotation.Nonnull;
 
-public interface AppArgumentsValidatorPolicy {
+public interface AppArgumentsValidationPolicy {
     void verify(@Nonnull AppArguments args) throws InvalidArgumentException;
 }

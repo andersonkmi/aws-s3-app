@@ -8,12 +8,12 @@ import javax.annotation.Nonnull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class CommandLineArgsValidator {
-    private static final Logger logger = LogManager.getLogger(CommandLineArgsValidator.class);
+public class AppArgsValidator {
+    private static final Logger logger = LogManager.getLogger(AppArgsValidator.class);
 
     private Set<AppArgumentsValidationPolicy> policies;
 
-    public CommandLineArgsValidator() {
+    public AppArgsValidator() {
         policies = new LinkedHashSet<>();
     }
 

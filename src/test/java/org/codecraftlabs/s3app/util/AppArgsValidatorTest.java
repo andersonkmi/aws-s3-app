@@ -1,6 +1,6 @@
 package org.codecraftlabs.s3app.util;
 
-import org.codecraftlabs.s3app.validator.CommandLineArgsValidator;
+import org.codecraftlabs.s3app.validator.AppArgsValidator;
 import org.codecraftlabs.s3app.validator.InvalidArgumentException;
 import org.codecraftlabs.s3app.validator.RegionOptionValidationPolicy;
 import org.codecraftlabs.s3app.validator.ServiceOptionValidationPolicy;
@@ -17,13 +17,13 @@ import static org.codecraftlabs.s3app.util.CommandLineS3Service.CREATE_BUCKET;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("CommandLineArgsValidator unit tests")
-public class CommandLineArgsValidatorTest {
-    private CommandLineArgsValidator validator;
+@DisplayName("AppArgsValidator unit tests")
+public class AppArgsValidatorTest {
+    private AppArgsValidator validator;
 
     @BeforeEach
     public void setup() {
-        validator = new CommandLineArgsValidator();
+        validator = new AppArgsValidator();
         validator.add(new RegionOptionValidationPolicy());
         validator.add(new ServiceOptionValidationPolicy());
     }

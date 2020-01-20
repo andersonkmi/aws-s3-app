@@ -10,7 +10,7 @@ import static java.lang.String.format;
 import static org.codecraftlabs.s3app.data.AWSRegion.findByCode;
 import static org.codecraftlabs.s3app.util.AppArguments.REGION_OPTION;
 
-public class RegionOptionValidationPolicy implements AppArgumentsValidationPolicy {
+class RegionOptionValidationPolicy implements AppArgumentsValidationPolicy {
     private static final Logger logger = LogManager.getLogger(RegionOptionValidationPolicy.class);
 
     @Override

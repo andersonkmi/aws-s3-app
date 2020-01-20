@@ -13,12 +13,15 @@ public class AppArgsValidator {
 
     private Set<AppArgumentsValidationPolicy> policies;
 
-    public AppArgsValidator() {
+    private AppArgsValidator() {
         policies = new LinkedHashSet<>();
     }
 
-    public void add(AppArgumentsValidationPolicy policy) {
-        policies.add(policy);
+    public static AppArgsValidator build() {
+        AppArgsValidator instance = new AppArgsValidator();
+        instance.policies.add(new RegionOptionValidationPolicy());
+        instance.policies.add(new ServiceOptionValidationPolicy());
+        return instance;
     }
 
     public void validate(@Nonnull AppArguments args) throws InvalidArgumentException {

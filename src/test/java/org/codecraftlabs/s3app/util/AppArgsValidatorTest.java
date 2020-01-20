@@ -2,8 +2,6 @@ package org.codecraftlabs.s3app.util;
 
 import org.codecraftlabs.s3app.validator.AppArgsValidator;
 import org.codecraftlabs.s3app.validator.InvalidArgumentException;
-import org.codecraftlabs.s3app.validator.RegionOptionValidationPolicy;
-import org.codecraftlabs.s3app.validator.ServiceOptionValidationPolicy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,9 +21,7 @@ public class AppArgsValidatorTest {
 
     @BeforeEach
     public void setup() {
-        validator = new AppArgsValidator();
-        validator.add(new RegionOptionValidationPolicy());
-        validator.add(new ServiceOptionValidationPolicy());
+        validator = AppArgsValidator.build();
     }
 
     @Test

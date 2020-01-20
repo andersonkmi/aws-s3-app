@@ -10,7 +10,7 @@ import static java.lang.String.format;
 import static org.codecraftlabs.s3app.util.AppArguments.SERVICE_OPTION;
 import static org.codecraftlabs.s3app.util.CommandLineS3Service.findByCode;
 
-public class ServiceOptionValidationPolicy implements AppArgumentsValidationPolicy {
+class ServiceOptionValidationPolicy implements AppArgumentsValidationPolicy {
     private static final Logger logger = LogManager.getLogger(ServiceOptionValidationPolicy.class);
 
     @Override

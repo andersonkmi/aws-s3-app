@@ -1,4 +1,4 @@
-package org.codecraftlabs.s3app.util;
+package org.codecraftlabs.s3app.validator;
 
 public class InvalidArgumentException extends Exception {
     public InvalidArgumentException(String message) {

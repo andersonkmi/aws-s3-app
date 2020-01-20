@@ -4,10 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codecraftlabs.s3app.service.AWSException;
 import org.codecraftlabs.s3app.service.AWSServiceExecutor;
-import org.codecraftlabs.s3app.util.CommandLineArgsValidator;
+import org.codecraftlabs.s3app.validator.CommandLineArgsValidator;
 import org.codecraftlabs.s3app.util.CommandLineException;
 import org.codecraftlabs.s3app.util.CommandLineUtil;
-import org.codecraftlabs.s3app.util.InvalidArgumentException;
+import org.codecraftlabs.s3app.validator.InvalidArgumentException;
 import static org.codecraftlabs.s3app.util.CommandLineUtil.help;
 
 public class Main {

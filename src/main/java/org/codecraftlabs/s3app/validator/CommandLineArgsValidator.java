@@ -1,8 +1,10 @@
-package org.codecraftlabs.s3app.util;
+package org.codecraftlabs.s3app.validator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codecraftlabs.s3app.data.AWSRegion;
+import org.codecraftlabs.s3app.util.AppArguments;
+import org.codecraftlabs.s3app.util.CommandLineS3Service;
 
 import javax.annotation.Nonnull;
 

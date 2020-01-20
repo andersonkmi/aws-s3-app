@@ -9,10 +9,8 @@ import org.codecraftlabs.s3app.util.AppArguments;
 import org.codecraftlabs.s3app.util.CommandLineS3Service;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.codecraftlabs.s3app.util.AppArguments.BUCKET_OPTION;
 import static org.codecraftlabs.s3app.util.AppArguments.KEY_OPTION;

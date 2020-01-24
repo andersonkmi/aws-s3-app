@@ -20,10 +20,7 @@ class S3BucketCreateService {
         try {
             var selectedRegion = awsRegion(bucket.region());
             var s3Client = S3Client.builder().region(selectedRegion).build();
-            var request = CreateBucketRequest
-                    .builder()
-                    .bucket(bucket.name())
-                    .build();
+            var request = CreateBucketRequest.builder().bucket(bucket.name()).build();
             s3Client.createBucket(request);
             logger.info(String.format("S3 bucket '%s' created!", bucket.name()));
         } catch (AwsServiceException | SdkClientException exception) {
